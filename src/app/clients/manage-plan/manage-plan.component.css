@@ -1,0 +1,22 @@
+.content {
+    padding: 20px;
+}
+
+.center-text {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.grid {
+    margin: auto;
+    max-width: 1200px; /* Adjust based on desired width */
+}
+
+mat-card {
+    min-height: 300px; /* Ensure consistent card heights */
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: center;
+}
