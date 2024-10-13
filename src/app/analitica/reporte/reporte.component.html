@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="fecha_inicio">Fecha Inicio:</label>
+        <input type="date" class="form-control" id="fecha_inicio"/>
+      </div>
+      <div class="form-group">
+        <label for="fecha_final">Fecha Final:</label>
+        <input type="date" class="form-control" id="fecha_final"/>
+      </div>
+      <div class="form-group">
+        <label for="tipo_incidente">Tipo Incidente:</label>
+        <select class="form-control" id="tipo_incidente">
+          <option value="">Seleccione</option>
+        </select>
+      </div>
+      <div class="form-grupo">
+        <label for="fecha_inicio">Agente:</label>
+        <select class="form-control" id="agente">
+          <option value="">Seleccione</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-9">
+      <div class="mb-2">
+        <div class="d-flex flex-row-reverse mx-2">
+          <div class="px-2">
+            <p class="m-0">Total Incidentes:</p>
+            <p class="m-0">235</p>
+          </div>
+          <div class="px-2">
+            <p class="m-0">Incidentes Resueltos:</p>
+            <p class="m-0">125</p>
+          </div>
+          <div class="px-2">
+            <p class="m-0">Total Usuarios:</p>
+            <p class="m-0">216</p>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row g-3 ">
+          <div class="col-6 ">
+            <div class="border rounded p-2 " style="height: 100%">
+              <p>Agentes con más incidentes sin resolver</p>
+              <ul>
+                <li>Tomás</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="border rounded p-2" style="height: 100%">
+              <p>Incidentes por canal</p>
+              <div style="height:250px">
+                <canvas id="data1"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 ">
+            <div class="border rounded p-2" style="height: 100%">
+              <p>Data 2</p>
+              <div style="height:250px">
+                <canvas id="data2"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 ">
+            <div class="border rounded p-2" style="height: 100%">
+              <p>Data 3</p>
+              <div style="height:250px">
+                <canvas id="data3"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
