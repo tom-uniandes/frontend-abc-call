@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'clients/manage-plan', component: ManagePlanComponent,  pathMatch: 'full' },
   { path: 'analitica/reporte', component: ReporteComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: '**', redirectTo: '/home' }  // Wildcard route for a 404 page
+  { path: '**', redirectTo: '/login' }  // Wildcard route for a 404 page
 ];
 
 @NgModule({
