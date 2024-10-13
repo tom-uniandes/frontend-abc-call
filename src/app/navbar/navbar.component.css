@@ -1,0 +1,38 @@
+a {
+  font-size: 110%;
+}
+
+.group-options {
+  margin-left: 24%;
+}
+
+.dropdown-menu {
+  background-color: black;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.menu-money {
+  margin-top: 12%;
+}
+
+.menu-language {
+  margin-top: 18%;
+}
+
+.dropdown-item:hover {
+  background-color: grey;
+  color: white;
+}
+
+.nav-item:hover {
+  background-color: grey;
+  color: white;
+  border-radius: 10%;
+}
+
+.logo-client {
+  margin-left: 6%;
+}
