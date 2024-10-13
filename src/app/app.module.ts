@@ -4,17 +4,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientsModule } from './clients/clients.module';
-import { NavbarComponent } from './navbar/navbar.component';
+import { AnaliticaModule } from './analitica/analitica.module';
+import { MenuModule } from './menu/menu.module';
+import { LoginComponent } from './authentication/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ClientsModule
+    ClientsModule,
+    AnaliticaModule,
+    MenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]
