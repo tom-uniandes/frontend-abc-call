@@ -15,7 +15,7 @@ interface Agente {
 interface Resultados {
   id:string;
   fecha:string;
-  idAgente: number;
+  idAgente: string;
   idUsuario:number;
   tipoIncidente:number;
   resuelto:boolean;
