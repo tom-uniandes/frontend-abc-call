@@ -1,0 +1,62 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card card-registrarse">
+        <div class="card-body">
+          <div>
+            <h3 class="title text-center">ABCall</h3>
+          </div>
+          <form>
+            <div class="form-outline border campos">
+              <i class="fa-solid fa-user"></i>
+              <label class="form-label" for="txtNombre">Nombre</label>
+              <input type="text" id="txtNombre" class="form-control" required/>
+            </div>
+            <div class="form-outline border campos">
+              <i class="fa-solid fa-passport"></i>
+              <label class="form-label" for="txtTipoIdentificacion">Tipo de identificación</label>
+              <select class="form-select">
+                <option value="Cedula de ciudadania">Cédula de ciudadania</option>
+                <option value="Cedula de extranjeria">Cédula de extranjeria</option>
+              </select>
+            </div>
+            <div class="form-outline border campos">
+              <i class="fa-solid fa-passport"></i>
+              <label class="form-label" for="txtNumeroIdentificacion">Numero de identificacion</label>
+              <input type="text" id="txtNumeroIdentificacion" class="form-control" required/>
+            </div>
+            <div class="form-outline border campos">
+              <i class="fa-solid fa-envelope"></i>
+              <label class="form-label" for="txtCorreo">Correo electronico</label>
+              <input type="text" id="txtCorreo" class="form-control" required/>
+            </div>
+            <div class="form-outline campos">
+              <i class="fa-solid fa-phone"></i>
+              <label class="form-label" for="txtCorreo">Telefono</label>
+              <div class="input-group">
+                <select class="form-select">
+                  <option value="+1">+1</option>
+                  <option value="+57">+57</option>
+                </select>
+                <input type="text" id="txtCorreo" class="form-control" required/>
+              </div>
+            </div>
+            <div class="form-outline border campos">
+              <i class="fa-solid fa-briefcase"></i>
+              <label class="form-label" for="txtEmpresa">Empresa</label>
+              <input type="text" id="txtEmpresa" class="form-control" required/>
+            </div>
+            <div class="form-outline border campos">
+              <i class="fa-solid fa-key"></i>
+              <label class="form-label" for="txtContrasena">Contraseña</label>
+              <input type="password" id="txtContrasena" class="form-control" required/>
+            </div>
+          </form>
+            <div class="registrarse">
+              <a href="/registrarse" class="btn btn-primary btn-registrarse">Registrarse</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
