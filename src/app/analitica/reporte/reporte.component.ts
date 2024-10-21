@@ -7,6 +7,22 @@ import data from '../incidentes_data.json';
 import {FormsModule} from "@angular/forms";
 import {BaseChartDirective} from "ng2-charts";
 
+interface Agente {
+  id: number;
+  nombre: string;
+}
+
+interface Resultados {
+  id:string;
+  fecha:string;
+  idAgente: number;
+  idUsuario:number;
+  tipoIncidente:number;
+  resuelto:boolean;
+  canal:number;
+}
+
+
 @Component({
   selector: 'app-reporte',
   standalone: true,
@@ -19,8 +35,8 @@ import {BaseChartDirective} from "ng2-charts";
 })
 export class ReporteComponent {
 
-  resultados: any[] = [];
-  agentes: any[] = [
+  resultados: Resultados[]=[];
+  agentes: Agente[] = [
     {'id': 1, 'nombre': 'Tomas'},
     {'id': 2, 'nombre': 'Santiago'},
     {'id': 3, 'nombre': 'Andres'},
@@ -72,7 +88,7 @@ export class ReporteComponent {
   }
 
   loadchartdata() {
-    this.resultados = (data as any[])
+    this.resultados = (data as Resultados[])
       .filter(value => {
         return this.fechaInicio ? new Date(value.fecha) >= new Date(this.fechaInicio) : true
       })
