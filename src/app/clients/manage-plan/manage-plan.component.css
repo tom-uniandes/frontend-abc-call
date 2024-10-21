@@ -1,0 +1,72 @@
+.pricing-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    margin: 20px;
+    margin-top: 3rem;
+  }
+  
+  .pricing-card {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensure content stays between the card */
+    background-color: #f3f4f6; /* Similar to the grey background */
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  mat-card-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  mat-card-content ul {
+    padding: 0;
+    text-align: left;
+  }
+  
+  mat-card-content ul li {
+    margin: 10px 0;
+    position: relative;
+  }
+  
+  mat-card-content ul li::before {
+    color: black; /* Adjust bullet color */
+    font-weight: bold;
+  }
+  
+  .card-footer {
+    margin-top: auto; /* Push the footer to the bottom */
+    text-align: center;
+  }
+  
+  .mat-raised-button {
+    border-radius: 100px;
+    width: 180px;
+    height: 40px;
+    background-color: #1c2451;
+    text-transform: capitalize;
+    font-family: 'Roboto', sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+  }
+
+  h3 {
+    font-size: 18px;
+    color: #333;
+    margin: 20px 0;
+  }
+  
+  button {
+    width: 100%;
+    background-color: #4f81c7; /* Set the button color to match the primary color */
+    color: white;
+  }
+  
+  button:hover {
+    background-color: #3669a1;
+  }  

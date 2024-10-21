@@ -1,0 +1,83 @@
+.campos {
+  border-radius: 4px;
+  width: 72%;
+  margin-left: 14%;
+  margin-top: 7%;
+}
+
+.title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 28px;
+  color: black;
+  margin-top: 10%;
+  padding-bottom: 7%;
+}
+
+.card-registrarse {
+  width: 90%;
+  margin-left: 5%;
+  margin-bottom: 10%;
+  border-color: #ffffff;
+}
+
+.card-body {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  background-color: #eaeaea;
+  border-color: #ffffff;
+}
+
+button {
+  border-radius: 100px;
+  width: 180px;
+  height: 40px;
+  background-color: #3a506b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.btn-registrarse:hover {
+  background-color: #3a506b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btn-registrarse {
+  border-radius: 100px;
+  width: 180px;
+  height: 40px;
+  background-color: #1c2451;
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+}
+
+.registrarse {
+  margin-left: 28%;
+  margin-top: 8%;
+  margin-bottom: 10%;
+}
+
+
+.form-label {
+  margin-left: 3%;
+}
+
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group select {
+  max-width: 30%;
+  margin-right: 3%;
+}
+
+.input-group input {
+  flex: 1;
+}
