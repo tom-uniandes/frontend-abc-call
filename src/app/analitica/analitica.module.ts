@@ -1,26 +1,34 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReporteComponent} from './reporte/reporte.component';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MenuModule } from "../menu/menu.module";
+import { ReporteComponent } from './reporte/reporte.component';
+// import { MatToolbarModule } from '@angular/material/toolbar';
+// import { MatCardModule } from '@angular/material/card';
+// import { MatButtonModule } from '@angular/material/button';
+// import { MatGridListModule } from '@angular/material/grid-list';
+// import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
+// MatToolbarModule,
+//   MatCardModule,
+//   MatButtonModule,
+//   MatGridListModule,
 
 @NgModule({
-  declarations: [
-    ReporteComponent
-  ],
+  declarations: [ ],
   imports: [
     CommonModule,
     MatToolbarModule,
     MatCardModule,
     MatButtonModule,
     MatGridListModule,
-    MenuModule
+    MenuModule,
+    ReporteComponent
 ],
   exports: [
     ReporteComponent
