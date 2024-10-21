@@ -88,17 +88,17 @@ export class ReporteComponent {
   }
 
   loadchartdata() {
-    this.resultados = (data as Resultados[])
-      .filter(value => {
+    this.resultados = <Resultados[]> Object.assign([], data)
+      .filter((value: Resultados) => {
         return this.fechaInicio ? new Date(value.fecha) >= new Date(this.fechaInicio) : true
       })
-      .filter(value => {
+      .filter((value: Resultados) => {
         return this.fechaFin ? new Date(value.fecha) <= new Date(this.fechaFin) : true
       })
-      .filter(value => {
+      .filter((value: Resultados) => {
         return this.tipoIncidente ? value.tipoIncidente == this.tipoIncidente : true
       })
-      .filter(value => {
+      .filter((value: Resultados) => {
         return this.agente ? value.idAgente == this.agente : true
       })
 
@@ -227,6 +227,10 @@ export class ReporteComponent {
         }
       ]
     };
+  }
+
+  getAgentes(): Array<Agente> {
+    return this.agentes;
   }
 
 }
