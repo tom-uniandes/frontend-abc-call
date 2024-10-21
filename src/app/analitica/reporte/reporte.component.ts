@@ -6,6 +6,7 @@ Chart.register(...registerables)
 import data from '../incidentes_data.json';
 import {FormsModule} from "@angular/forms";
 import {BaseChartDirective} from "ng2-charts";
+import { MenuModule } from "../../menu/menu.module";
 
 interface Agente {
   id: number;
@@ -28,8 +29,9 @@ interface Resultados {
   standalone: true,
   imports: [
     FormsModule,
-    BaseChartDirective
-  ],
+    BaseChartDirective,
+    MenuModule
+],
   templateUrl: './reporte.component.html',
   styleUrls: ['./reporte.component.css']
 })
