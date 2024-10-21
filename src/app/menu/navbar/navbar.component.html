@@ -25,24 +25,24 @@
           <a i18n class="nav-link active" href="/clients/manage-plan">Mi plan</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{selectedMoney}}
           </a>
           <ul class="dropdown-menu menu-money">
-            <li><a class="dropdown-item" href="#" (click)="changeMoney('$-COP')">$-COP</a></li>
-            <li><a class="dropdown-item" href="#" (click)="changeMoney('USD')">USD</a></li>
-            <li><a class="dropdown-item" href="#" (click)="changeMoney('€-EUR')">€-EUR</a></li>
+            <li><a class="dropdown-item" (click)="changeMoney('$-COP')">$-COP</a></li>
+            <li><a class="dropdown-item" (click)="changeMoney('USD')">USD</a></li>
+            <li><a class="dropdown-item" (click)="changeMoney('€-EUR')">€-EUR</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img [src]="selectedLanguage === 'Español' ? 'assets/language/flag-spain.png' : 'assets/language/flag-england.png'"
                  alt="Selección de lenguaje"
                  width="30" height="20">
           </a>
           <ul class="dropdown-menu menu-language">
-            <li><a class="dropdown-item" href="#" (click)="changeLanguage('Español')">Español</a></li>
-            <li><a class="dropdown-item" href="#" (click)="changeLanguage('English')">English</a></li>
+            <li><a class="dropdown-item" (click)="changeLanguage('Español')">Español</a></li>
+            <li><a class="dropdown-item" (click)="changeLanguage('English')">English</a></li>
           </ul>
         </li>
         <li class="nav-item">
