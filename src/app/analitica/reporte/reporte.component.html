@@ -4,22 +4,29 @@
     <div class="col-sm-3">
       <div class="form-group">
         <label for="fecha_inicio">Fecha Inicio:</label>
-        <input type="date" class="form-control" id="fecha_inicio"/>
+        <input [(ngModel)]="fechaInicio" type="date" class="form-control" id="fecha_inicio" (change)="loadchartdata()"/>
       </div>
       <div class="form-group">
         <label for="fecha_final">Fecha Final:</label>
-        <input type="date" class="form-control" id="fecha_final"/>
+        <input [(ngModel)]="fechaFin" type="date" class="form-control" id="fecha_final" (change)="loadchartdata()"/>
       </div>
       <div class="form-group">
         <label for="tipo_incidente">Tipo Incidente:</label>
-        <select class="form-control" id="tipo_incidente">
-          <option value="">Seleccione</option>
+        <select [(ngModel)]="tipoIncidente" class="form-control" id="tipo_incidente" (change)="loadchartdata()">
+          <option value="">Todos</option>
+          <option value="1">Petición</option>
+          <option value="2">Queja</option>
+          <option value="3">Reclamo</option>
+          <option value="4">Sugerencia</option>
         </select>
       </div>
       <div class="form-grupo">
-        <label for="fecha_inicio">Agente:</label>
-        <select class="form-control" id="agente">
-          <option value="">Seleccione</option>
+        <label for="agente">Agente:</label>
+        <select [(ngModel)]="agente" class="form-control" id="agente" (change)="loadchartdata()">
+          <option value="">Todos</option>
+          @for (agente of getAgentes(); track agente.id){
+          <option [value]="agente.id">{{agente.nombre}}</option>
+          }
         </select>
       </div>
     </div>
@@ -28,15 +35,15 @@
         <div class="d-flex flex-row-reverse mx-2">
           <div class="px-2">
             <p class="m-0">Total Incidentes:</p>
-            <p class="m-0">235</p>
+            <p class="m-0">{{resultados.length}}</p>
           </div>
           <div class="px-2">
             <p class="m-0">Incidentes Resueltos:</p>
-            <p class="m-0">125</p>
+            <p class="m-0">{{incidentes_resueltos}}</p>
           </div>
           <div class="px-2">
             <p class="m-0">Total Usuarios:</p>
-            <p class="m-0">216</p>
+            <p class="m-0">{{total_usuarios}}</p>
           </div>
         </div>
       </div>
@@ -46,7 +53,9 @@
             <div class="border rounded p-2 " style="height: 100%">
               <p>Agentes con más incidentes sin resolver</p>
               <ul>
-                <li>Tomás</li>
+                @for (agente of listaIncSinSolucion; track $index) {
+                  <li>{{agente.nombre}}: {{agente.sinSolucion}}</li>
+                }
               </ul>
             </div>
           </div>
@@ -54,23 +63,32 @@
             <div class="border rounded p-2" style="height: 100%">
               <p>Incidentes por canal</p>
               <div style="height:250px">
-                <canvas id="data1"></canvas>
+                <canvas baseChart id="chart_incidentes_por_canal"
+                        [data]="dataIncXCanal"
+                        [options]="opcIncXCanal"
+                        type="pie" ></canvas>
               </div>
             </div>
           </div>
           <div class="col-6 ">
             <div class="border rounded p-2" style="height: 100%">
-              <p>Data 2</p>
+              <p>Incidentes Sin Resolver por Semana</p>
               <div style="height:250px">
-                <canvas id="data2"></canvas>
+                <canvas baseChart id="chart_incidentes_no_resueltos"
+                        [data]="dataIncSinSolucion"
+                        [options]="opcIncSinSolucion"
+                        type="bar" ></canvas>
               </div>
             </div>
           </div>
           <div class="col-6 ">
             <div class="border rounded p-2" style="height: 100%">
-              <p>Data 3</p>
+              <p>Incidentes Resueltas por Semana</p>
               <div style="height:250px">
-                <canvas id="data3"></canvas>
+                <canvas baseChart id="chart_incidentes_resueltos"
+                        [data]="dataIncConSolucion"
+                        [options]="opcIncConSolucion"
+                        type="bar" ></canvas>
               </div>
             </div>
           </div>
