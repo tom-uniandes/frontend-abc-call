@@ -6,14 +6,26 @@
           <div>
             <h3 class="title text-center">ABCall</h3>
           </div>
-          <form (ngSubmit)="createUserClient()">
-            <div class="form-outline border campos">
+          <form [formGroup]="userClientForm" (ngSubmit)="createUserClient(userClientForm.value)">
+
+            <!--Name-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-user"></i>
               <label class="form-label" for="name">Nombre</label>
-              <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newUserClient.name"/>
-              <div i18n class="text-danger" *ngIf="errorMessages['name']">{{ errorMessages['name']}}</div>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="name"
+                [ngClass]="{'border-danger': userClientForm.get('name')?.invalid && userClientForm.get('name')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('name')?.invalid && userClientForm.get('name')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('name')?.errors?.['required']">El nombre es requerido</div>
+                <div *ngIf="userClientForm.get('name')?.errors?.['maxLength']">No debe tener más de 150 caracteres</div>
+              </div>
             </div>
-            <div class="form-outline border campos">
+
+            <div class="form-outline campos">
               <i class="fa-solid fa-passport"></i>
               <label class="form-label" for="txtTipoIdentificacion">Tipo de identificación</label>
               <select class="form-select">
@@ -21,16 +33,42 @@
                 <option value="Cedula de extranjeria">Cédula de extranjeria</option>
               </select>
             </div>
-            <div class="form-outline border campos">
+
+            <!--Number of identification-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-passport"></i>
-              <label class="form-label" for="txtNumeroIdentificacion">Numero de identificacion</label>
-              <input type="text" id="txtNumeroIdentificacion" class="form-control" required/>
+              <label class="form-label" for="idNumber">Número de identificación</label>
+              <input
+                type="text"
+                id="idNumber"
+                class="form-control"
+                formControlName="idNumber"
+                [ngClass]="{'border-danger': userClientForm.get('idNumber')?.invalid && userClientForm.get('idNumber')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('idNumber')?.invalid && userClientForm.get('idNumber')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('idNumber')?.errors?.['required']">El número de identificación es requerido</div>
+              </div>
             </div>
-            <div class="form-outline border campos">
+
+            <!--Email-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-envelope"></i>
-              <label class="form-label" for="txtCorreo">Correo electronico</label>
-              <input type="text" id="txtCorreo" class="form-control" required/>
+              <label class="form-label" for="email">Correo electronico</label>
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="{'border-danger': userClientForm.get('email')?.invalid && userClientForm.get('email')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('email')?.invalid && userClientForm.get('email')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('email')?.errors?.['required']">El correo es requerido</div>
+                <div *ngIf="userClientForm.get('email')?.errors?.['maxLength']">No debe tener más de 130 caracteres</div>
+                <div *ngIf="userClientForm.get('email')?.errors?.['email']">Debe ingresar un correo válido</div>
+              </div>
             </div>
+
+            <!--Phone-->
             <div class="form-outline campos">
               <i class="fa-solid fa-phone"></i>
               <label class="form-label" for="txtCorreo">Telefono</label>
@@ -39,14 +77,38 @@
                   <option value="+1">+1</option>
                   <option value="+57">+57</option>
                 </select>
-                <input type="text" id="txtCorreo" class="form-control" required/>
+                <input
+                  type="text"
+                  id="phone"
+                  class="form-control"
+                  formControlName="phone"
+                  [ngClass]="{'border-danger': userClientForm.get('phone')?.invalid && userClientForm.get('phone')?.touched}"
+                />
+              </div>
+              <div *ngIf="userClientForm.get('phone')?.invalid && userClientForm.get('phone')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('phone')?.errors?.['required']">El teléfono es requerido</div>
+                <div *ngIf="userClientForm.get('phone')?.errors?.['maxLength']">No debe tener más de 50 caracteres</div>
+                <div *ngIf="userClientForm.get('phone')?.errors?.['pattern']">Deben ser solo números</div>
               </div>
             </div>
-            <div class="form-outline border campos">
+
+            <!--Company-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-briefcase"></i>
               <label class="form-label" for="txtEmpresa">Empresa</label>
-              <input type="text" id="txtEmpresa" class="form-control" required/>
+              <input
+                type="text"
+                id="company"
+                class="form-control"
+                formControlName="company"
+                [ngClass]="{'border-danger': userClientForm.get('company')?.invalid && userClientForm.get('company')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('company')?.invalid && userClientForm.get('company')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('company')?.errors?.['required']">La empresa es requerida</div>
+                <div *ngIf="userClientForm.get('company')?.errors?.['maxLength']">No debe tener más de 60 caracteres</div>
+              </div>
             </div>
+
             <div class="form-outline border campos">
               <i class="fa-solid fa-key"></i>
               <label class="form-label" for="txtContrasena">Contraseña</label>

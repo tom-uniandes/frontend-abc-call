@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { UserClient } from '../user-client';
 import { Router } from '@angular/router';
 import { RegisterService } from '../register.service';
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -10,33 +12,48 @@ import { RegisterService } from '../register.service';
   styleUrl: './register-client.component.css'
 })
 
-export class RegisterClientComponent {
-  newUserClient: UserClient = new UserClient('', '', '', '', '');
-  errorMessages: { [key: string]: string } = {};
+export class RegisterClientComponent implements OnInit {
 
+  userClientForm: FormGroup;
 
-  constructor(private registerService: RegisterService, private router: Router) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private registerService: RegisterService,
+    private toastr: ToastrService,
+  ) { this.userClientForm = this.formBuilder.group({}) }
 
-  createUserClient() {
-    if (this.validateUserClient()) {
-      this.registerService.createUserClient(this.newUserClient)
-      .subscribe(createdUser => {
-        console.log('User created:', createdUser);
-        this.newUserClient = new UserClient('', '', '', '', '');
-        this.router.navigateByUrl('/login');
-      });
-    }
+  ngOnInit() {
+    this.userClientForm = this.formBuilder.group({
+      name: ["", [Validators.required, Validators.maxLength(150)]],
+      idNumber: ["", [Validators.required]],
+      email: ["", [Validators.required, Validators.email, Validators.maxLength(150)]],
+      phone: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.maxLength(50)]],
+      company: ["", [Validators.required, Validators.maxLength(60)]],
+    });
   }
 
-  validateUserClient(): boolean {
+  createUserClient(userClient: UserClient): void {
 
-    console.log(this.newUserClient.name)
-    if (!this.newUserClient.name || this.newUserClient.name.trim().length === 0) {
-      this.errorMessages["name"] = 'El campo nombre es requerido.';
-    } else if (this.newUserClient.name.length > 255) {
-      this.errorMessages["name"] = 'El campo nombre no puede exceder los 255 caracteres';
+    if (this.userClientForm.invalid) {
+      const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
+      if (invalidFields.length > 1) {
+        invalidFields[1].focus();
+      } else if (invalidFields.length > 0) {
+        invalidFields[0].focus();
+      }
+      this.toastr.error('Completa el formulario de registro correctamente');
+      return;
     }
 
-    return Object.keys(this.errorMessages).length === 0;
+    this.registerService.createUserClient(userClient)
+      .subscribe(createdUserClient => {
+        this.toastr.success('Registro exitoso');
+        console.log('User client created');
+        setTimeout(() => {
+          this.router.navigateByUrl('/login');
+        }, 1000);
+    });
   }
+
 }
