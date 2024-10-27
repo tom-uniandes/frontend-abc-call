@@ -1,14 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
 
-  constructor() {
+  constructor(private router: Router,) {
     this.filterCurrentClient();
+  }
+
+  ngOnInit() {
+    const token = sessionStorage.getItem("abcall-token");
+    if (!token) {
+      this.router.navigateByUrl("/login")
+    }
   }
 
   selectedLanguage = 'Español';
