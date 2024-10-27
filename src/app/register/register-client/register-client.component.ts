@@ -26,6 +26,7 @@ export class RegisterClientComponent implements OnInit {
   ngOnInit() {
     this.userClientForm = this.formBuilder.group({
       name: ["", [Validators.required, Validators.maxLength(150)]],
+      idType: ["", [Validators.required]],
       idNumber: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email, Validators.maxLength(150)]],
       phoneNumber: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.maxLength(50)]],
@@ -36,6 +37,7 @@ export class RegisterClientComponent implements OnInit {
 
   createUserClient(userClient: UserClient): void {
 
+    console.log(userClient)
     if (this.userClientForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {

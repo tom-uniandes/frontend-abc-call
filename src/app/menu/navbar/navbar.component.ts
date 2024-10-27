@@ -14,7 +14,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     const token = sessionStorage.getItem("abcall-token");
-
     if (!token) {
       this.router.navigateByUrl("/login")
     }
