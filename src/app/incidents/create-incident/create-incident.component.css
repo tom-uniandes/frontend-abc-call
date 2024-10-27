@@ -1,0 +1,59 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 3rem;
+}
+
+.incident-form {
+  gap: 1rem;
+}
+
+.mat-form-field {
+  width: 100%;
+  background-color: #fff;
+}
+
+.mat-form-field .mat-input-element {
+  padding: 10px; /* Add padding to inputs for a cleaner look */
+}
+
+.mat-form-field-outline .mat-form-field-outline-start,
+.mat-form-field-outline .mat-form-field-outline-end {
+  border-width: 1px;
+  border-color: #bdbdbd; /* Lighter border color */
+}
+
+textarea[matInput] {
+  resize: none; /* Prevent manual resizing of textarea */
+}
+
+button[mat-raised-button] {
+  background-color: #3f51b5; /* Update color to match theme */
+  color: #fff;
+}
+
+button[mat-icon-button] {
+  padding: 0.5rem;
+}
+
+.timer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.timer mat-card {
+  background-color: #f2f2f2; /* Light background color */
+  padding: 10px;
+  color: #333;
+  font-size: 14px;
+  width: auto;
+  box-shadow: none;
+  margin-top: -4rem;
+  margin-bottom: 2rem;
+}

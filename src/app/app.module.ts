@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Importa este módulo
 import { ToastrModule } from 'ngx-toastr';
+import { IncidentsModule } from './incidents/incidents.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    IncidentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
