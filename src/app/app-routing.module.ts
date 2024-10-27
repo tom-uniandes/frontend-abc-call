@@ -4,6 +4,7 @@ import { ManagePlanComponent } from './clients/manage-plan/manage-plan.component
 import { ReporteComponent } from './analitica/reporte/reporte.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { RegisterClientComponent } from './register/register-client/register-client.component';
+import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'analitica/reporte', component: ReporteComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterClientComponent, pathMatch: 'full' },
+  {path:'incidents/create-incident', component: CreateIncidentComponent, pathMatch: 'full'},
   { path: '**', redirectTo: '/login' }  // Wildcard route for a 404 page
 ];
 
