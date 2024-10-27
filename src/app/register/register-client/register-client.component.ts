@@ -47,15 +47,11 @@ export class RegisterClientComponent implements OnInit {
       return;
     }
 
-    console.log(userClient)
-
     this.registerService.createUserClient(userClient)
-      .subscribe(createdUserClient => {
+      .subscribe(() => {
         this.toastr.success('Registro exitoso');
         console.log('User client created');
-        setTimeout(() => {
-          this.router.navigateByUrl('/login');
-        }, 1000);
+        this.router.navigateByUrl('/login');
     },
     error => {
       console.error('Error al crear el usuario:', error);
