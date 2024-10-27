@@ -5,9 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientsModule } from './clients/clients.module';
 import { AnaliticaModule } from './analitica/analitica.module';
+import { RegisterModule } from './register/register.module';
 import { MenuModule } from './menu/menu.module';
 import { LoginComponent } from './authentication/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     ClientsModule,
     AnaliticaModule,
-    MenuModule
+    MenuModule,
+    RegisterModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

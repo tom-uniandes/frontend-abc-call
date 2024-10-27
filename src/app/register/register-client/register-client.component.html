@@ -6,11 +6,12 @@
           <div>
             <h3 class="title text-center">ABCall</h3>
           </div>
-          <form>
+          <form (ngSubmit)="createUserClient()">
             <div class="form-outline border campos">
               <i class="fa-solid fa-user"></i>
-              <label class="form-label" for="txtNombre">Nombre</label>
-              <input type="text" id="txtNombre" class="form-control" required/>
+              <label class="form-label" for="name">Nombre</label>
+              <input type="text" id="name" name="name" class="form-control" [(ngModel)]="newUserClient.name"/>
+              <div i18n class="text-danger" *ngIf="errorMessages['name']">{{ errorMessages['name']}}</div>
             </div>
             <div class="form-outline border campos">
               <i class="fa-solid fa-passport"></i>
@@ -51,10 +52,10 @@
               <label class="form-label" for="txtContrasena">Contraseña</label>
               <input type="password" id="txtContrasena" class="form-control" required/>
             </div>
-          </form>
             <div class="registrarse">
-              <a href="/registrarse" class="btn btn-primary btn-registrarse">Registrarse</a>
+              <button i18n type="submit" class="btn btn-primary btn-registrarse">Registrarse</button>
             </div>
+          </form>
         </div>
       </div>
     </div>
