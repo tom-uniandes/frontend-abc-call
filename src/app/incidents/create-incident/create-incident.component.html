@@ -1,0 +1,85 @@
+<app-navbar></app-navbar>
+<div class="container mt-4">
+    <div>
+        <h2 class="header-title mb-4">Registrar incidente</h2>
+        <div class="row timer">
+            <div class="col-12 d-flex justify-content-end">
+              <mat-card class="p-3 shadow-sm bg-light rounded">
+                <div class="fw-bold">Tiempo transcurrido</div>
+                <div>00:01:26</div>
+              </mat-card>
+            </div>
+          </div>
+    </div>
+  
+    <div class="incident-form">
+        <div class="row mb-2">
+            <div class="col-12">
+              <label for="usuario" class="me-2 w-100">Usuario:</label>
+              <div class="d-flex align-items-center">
+                <mat-form-field appearance="outline" class="flex-grow-1 me-2">
+                  <input matInput placeholder="Seleccione un usuario">
+                </mat-form-field>
+                <button mat-icon-button class="me-2">
+                  <mat-icon>search</mat-icon>
+                </button>
+                <button mat-icon-button class="btn-circle">
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+          
+
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="fecha">Fecha:</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput [matDatepicker]="picker" placeholder="Seleccione la fecha">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="tipo-problema">Tipo de problema:</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select placeholder="Seleccione el tipo de problema">
+              <mat-option value="problema1">Problema 1</mat-option>
+              <mat-option value="problema2">Problema 2</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="canal-recepcion">Canal de recepción:</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select placeholder="Seleccione el canal de recepción">
+              <mat-option value="canal1">Canal 1</mat-option>
+              <mat-option value="canal2">Canal 2</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row mb-3">
+        <div class="col-12">
+          <label for="descripcion">Descripción:</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <textarea matInput rows="4" placeholder="Escriba la descripción del incidente"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+  
+      <div class="row mb-3">
+        <div class="col-12 d-flex justify-content-start">
+          <button mat-raised-button color="primary" class="btn btn-primary">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

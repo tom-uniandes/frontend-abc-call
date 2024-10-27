@@ -8,6 +8,7 @@ import { AnaliticaModule } from './analitica/analitica.module';
 import { MenuModule } from './menu/menu.module';
 import { LoginComponent } from './authentication/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { IncidentsModule } from './incidents/incidents.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     ClientsModule,
     AnaliticaModule,
-    MenuModule
+    MenuModule,
+    IncidentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
