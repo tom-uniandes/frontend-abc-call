@@ -28,8 +28,9 @@ export class RegisterClientComponent implements OnInit {
       name: ["", [Validators.required, Validators.maxLength(150)]],
       idNumber: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email, Validators.maxLength(150)]],
-      phone: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.maxLength(50)]],
+      phoneNumber: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.maxLength(50)]],
       company: ["", [Validators.required, Validators.maxLength(60)]],
+      password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
     });
   }
 
@@ -46,6 +47,8 @@ export class RegisterClientComponent implements OnInit {
       return;
     }
 
+    console.log(userClient)
+
     this.registerService.createUserClient(userClient)
       .subscribe(createdUserClient => {
         this.toastr.success('Registro exitoso');
@@ -53,6 +56,11 @@ export class RegisterClientComponent implements OnInit {
         setTimeout(() => {
           this.router.navigateByUrl('/login');
         }, 1000);
+    },
+    error => {
+      console.error('Error al crear el usuario:', error);
+      const errorMessage = error.error?.message || 'Ocurrió un error al crear el usuario';
+      this.toastr.error(errorMessage);
     });
   }
 

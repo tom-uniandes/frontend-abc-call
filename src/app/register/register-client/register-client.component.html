@@ -79,23 +79,23 @@
                 </select>
                 <input
                   type="text"
-                  id="phone"
+                  id="phoneNumber"
                   class="form-control"
-                  formControlName="phone"
-                  [ngClass]="{'border-danger': userClientForm.get('phone')?.invalid && userClientForm.get('phone')?.touched}"
+                  formControlName="phoneNumber"
+                  [ngClass]="{'border-danger': userClientForm.get('phoneNumber')?.invalid && userClientForm.get('phoneNumber')?.touched}"
                 />
               </div>
-              <div *ngIf="userClientForm.get('phone')?.invalid && userClientForm.get('phone')?.touched" class="text-danger">
-                <div *ngIf="userClientForm.get('phone')?.errors?.['required']">El teléfono es requerido</div>
-                <div *ngIf="userClientForm.get('phone')?.errors?.['maxLength']">No debe tener más de 50 caracteres</div>
-                <div *ngIf="userClientForm.get('phone')?.errors?.['pattern']">Deben ser solo números</div>
+              <div *ngIf="userClientForm.get('phoneNumber')?.invalid && userClientForm.get('phoneNumber')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['required']">El teléfono es requerido</div>
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['maxLength']">No debe tener más de 50 caracteres</div>
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['pattern']">Deben ser solo números</div>
               </div>
             </div>
 
             <!--Company-->
             <div class="form-outline campos">
               <i class="fa-solid fa-briefcase"></i>
-              <label class="form-label" for="txtEmpresa">Empresa</label>
+              <label class="form-label" for="company">Empresa</label>
               <input
                 type="text"
                 id="company"
@@ -109,10 +109,22 @@
               </div>
             </div>
 
+            <!--Password-->
             <div class="form-outline border campos">
               <i class="fa-solid fa-key"></i>
-              <label class="form-label" for="txtContrasena">Contraseña</label>
-              <input type="password" id="txtContrasena" class="form-control" required/>
+              <label class="form-label" for="password">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                [ngClass]="{'border-danger': userClientForm.get('password')?.invalid && userClientForm.get('password')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('password')?.invalid && userClientForm.get('password')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
+                <div *ngIf="userClientForm.get('password')?.errors?.['minLength']">No debe tener menos de 8 caracteres</div>
+                <div *ngIf="userClientForm.get('password')?.errors?.['maxLength']">No debe tener más de 20 caracteres</div>
+              </div>
             </div>
             <div class="registrarse">
               <button i18n type="submit" class="btn btn-primary btn-registrarse">Registrarse</button>
