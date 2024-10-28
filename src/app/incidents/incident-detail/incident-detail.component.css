@@ -1,0 +1,35 @@
+/* Add left margin to all items */
+h1, p {
+  margin-left: 20px; /* Adjust the margin as needed */
+}
+
+/* Style for the buttons */
+button {
+  border-radius: 20px; /* Rounded corners */
+  color: white; /* White text */
+  background-color: #2A2D6D; /* Space Cadet fill color */
+  padding: 10px 20px; /* Padding for the buttons */
+  border: none; /* Remove default border */
+  cursor: pointer; /* Pointer on hover */
+}
+
+button {
+  background-color: #3a506b !important; /* Set the button color to match the primary color */
+  color: white !important;
+}
+
+button:hover {
+  background-color: #1c2451 !important;
+}
+
+.mat-raised-button {
+  border-radius: 100px;
+  width: 180px;
+  height: 40px;
+  background-color: #1c2451;
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+}
+
