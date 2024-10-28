@@ -7,6 +7,7 @@ import { RegisterClientComponent } from './register/register-client/register-cli
 import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
 import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
 
+
 const routes: Routes = [
   // { path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule) },
   { path: 'clients/manage-plan', component: ManagePlanComponent,  pathMatch: 'full' },
