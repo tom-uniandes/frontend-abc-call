@@ -26,6 +26,7 @@ export class RegisterClientComponent implements OnInit {
   ngOnInit() {
     this.userClientForm = this.formBuilder.group({
       name: ["", [Validators.required, Validators.maxLength(150)]],
+      idType: ["", [Validators.required]],
       idNumber: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email, Validators.maxLength(150)]],
       phoneNumber: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.maxLength(50)]],
@@ -36,6 +37,7 @@ export class RegisterClientComponent implements OnInit {
 
   createUserClient(userClient: UserClient): void {
 
+    console.log(userClient)
     if (this.userClientForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {
@@ -47,15 +49,11 @@ export class RegisterClientComponent implements OnInit {
       return;
     }
 
-    console.log(userClient)
-
     this.registerService.createUserClient(userClient)
-      .subscribe(createdUserClient => {
+      .subscribe(() => {
         this.toastr.success('Registro exitoso');
         console.log('User client created');
-        setTimeout(() => {
-          this.router.navigateByUrl('/login');
-        }, 1000);
+        this.router.navigateByUrl('/login');
     },
     error => {
       console.error('Error al crear el usuario:', error);

@@ -28,10 +28,18 @@
             <div class="form-outline campos">
               <i class="fa-solid fa-passport"></i>
               <label class="form-label" for="txtTipoIdentificacion">Tipo de identificación</label>
-              <select class="form-select">
-                <option value="Cedula de ciudadania">Cédula de ciudadania</option>
-                <option value="Cedula de extranjeria">Cédula de extranjeria</option>
+              <select class="form-select"
+                  id="idType"
+                  formControlName="idType"
+                  [ngClass]="{'border-danger': userClientForm.get('idType')?.invalid && userClientForm.get('idType')?.touched}"
+                >
+                <option value="" selected hidden>Seleccione una opción</option>
+                <option value="CEDULA_CIUDADANIA">Cédula de ciudadania</option>
+                <option value="CEDULA_EXTRANJERIA">Cédula de extranjeria</option>
               </select>
+              <div *ngIf="userClientForm.get('idType')?.invalid && userClientForm.get('idType')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('idType')?.errors?.['required']">Debe seleccionar una opción</div>
+              </div>
             </div>
 
             <!--Number of identification-->

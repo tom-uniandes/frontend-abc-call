@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common'
 import { CreateIncidentComponent } from './create-incident/create-incident.component';
-
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -13,12 +12,18 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MenuModule } from '../menu/menu.module';
-
+import { IncidentDetailComponent } from './incident-detail/incident-detail.component';
+import { IncidentsRoutingModule } from './incidents-routing.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SolutionsDialogComponent } from '../solutions-dialog/solutions-dialog.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
-    CreateIncidentComponent
+    CreateIncidentComponent,
+    IncidentDetailComponent,
+    SolutionsDialogComponent
   ],
   imports: [
     CommonModule,
@@ -32,10 +37,15 @@ import { MenuModule } from '../menu/menu.module';
     MatIconModule,
     MatDividerModule,
     MatFormFieldModule,
-    MenuModule
+    MenuModule,
+    IncidentsRoutingModule,
+    MatDialogModule,
+    HttpClientModule
   ],
   exports: [
-    CreateIncidentComponent
+    CreateIncidentComponent,
+    IncidentDetailComponent,
+    SolutionsDialogComponent
   ]
 })
 export class IncidentsModule { }
