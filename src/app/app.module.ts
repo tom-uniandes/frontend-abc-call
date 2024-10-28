@@ -8,11 +8,12 @@ import { AnaliticaModule } from './analitica/analitica.module';
 import { MenuModule } from './menu/menu.module';
 import { LoginComponent } from './authentication/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { IncidentsModule } from './incidents/incidents.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +22,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     ClientsModule,
     AnaliticaModule,
+    IncidentsModule,
     MenuModule
   ],
   providers: [],
