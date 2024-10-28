@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {FilterIncidente, ResultadoIncidente, Resultados} from "../model";
+import {FilterIncidente, ResultadoIncidente} from "../model";
 
 let headers = new HttpHeaders({ 'Content-Type': 'application/json' })
 
