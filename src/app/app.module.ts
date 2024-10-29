@@ -12,10 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { ToastrModule } from 'ngx-toastr';
 import { IncidentsModule } from './incidents/incidents.module';
 import { AuthenticationModule } from './authentication/authentication.module';
+import { FooterModule } from './footer/footer.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +26,7 @@ import { AuthenticationModule } from './authentication/authentication.module';
     ClientsModule,
     AnaliticaModule,
     MenuModule,
+    FooterModule,
     RegisterModule,
     AuthenticationModule,
     HttpClientModule,
