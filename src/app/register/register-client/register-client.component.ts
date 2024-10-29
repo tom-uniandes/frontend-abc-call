@@ -37,7 +37,6 @@ export class RegisterClientComponent implements OnInit {
 
   createUserClient(userClient: UserClient): void {
 
-    console.log(userClient)
     if (this.userClientForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {

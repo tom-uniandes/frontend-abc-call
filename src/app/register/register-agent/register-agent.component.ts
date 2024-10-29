@@ -34,7 +34,8 @@ export class RegisterAgentComponent implements OnInit {
 
   createUserAgent(userAgent: UserAgent): void {
 
-    console.log(userAgent)
+    userAgent.rol = "AGENTE"
+    userAgent.company = "uniandes"
     if (this.userAgentForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {
