@@ -35,6 +35,11 @@ export class NavbarComponent implements OnInit {
     this.currentClient = client
       .filter(client => client.name = "Uniandes")
   }
+
+  logout() {
+    sessionStorage.clear()
+    this.router.navigateByUrl("/login")
+  }
 }
 
 interface Client {
