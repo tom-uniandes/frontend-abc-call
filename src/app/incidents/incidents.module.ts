@@ -17,6 +17,7 @@ import { IncidentsRoutingModule } from './incidents-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SolutionsDialogComponent } from '../solutions-dialog/solutions-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -40,7 +41,9 @@ import { HttpClientModule } from '@angular/common/http';
     MenuModule,
     IncidentsRoutingModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     CreateIncidentComponent,
