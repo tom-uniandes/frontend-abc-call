@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div class="container mt-4">
+    <h2 class="header-title mb-4">Buscar incidente</h2>
+    
+    <!-- Search Form -->
+    <div class="row mb-3 align-items-end">
+      <div class="col-md-5">
+        <label for="userId" class="form-label">ID Usuario:</label>
+        <input type="text" class="form-control" id="userId" placeholder="Ingrese el ID del usuario">
+      </div>
+      <div class="col-md-5">
+        <label for="incidentId" class="form-label">ID Incidente:</label>
+        <input type="text" class="form-control" id="incidentId" placeholder="Ingrese el ID del incidente">
+      </div>
+      <div class="col-md-2 d-flex justify-content-end">
+        <button type="button" class="btn btn-primary" (click)="searchIncident()">Buscar</button>
+      </div>
+    </div>
+  
+    <!-- Incidents List -->
+    <div *ngFor="let incident of incidents" class="incident-card mb-3 p-3 rounded" (click)="viewIncidentDetail(incident.id)" style="cursor: pointer;">
+        <h4>Incidente {{ incident.id }}: {{ incident.solved ? 'Resuelto' : 'Abierto' }}</h4>
+        <p>{{ incident.description }}</p>
+        <div class="incident-date">
+          <mat-icon>event</mat-icon> {{ incident.date | date:'MM/dd/yyyy' }}
+        </div>
+    </div>
+</div>
+  

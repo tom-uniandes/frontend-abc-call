@@ -15,9 +15,17 @@
 
     <div class="collapse navbar-collapse group-options" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a i18n class="nav-link active" href="/incidents/incident-detail">Incidentes</a>
+        <!-- Incidents Dropdown -->
+        <li class="nav-item dropdown">
+          <a i18n class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Incidentes
+          </a>
+          <ul class="dropdown-menu">
+            <li><a i18n class="dropdown-item" href="/incidents/create-incident">Registrar</a></li>
+            <li><a i18n class="dropdown-item" href="/incidents/search-incident">Buscar</a></li>
+          </ul>
         </li>
+        
         <li class="nav-item">
           <a i18n class="nav-link active" href="/analitica/reporte">Dashboard</a>
         </li>
@@ -27,6 +35,8 @@
         <li class="nav-item">
           <a i18n class="nav-link active" href="/register-agent">Agentes</a>
         </li>
+
+        <!-- Currency Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{selectedMoney}}
@@ -37,6 +47,8 @@
             <li><a class="dropdown-item" (click)="changeMoney('€-EUR')">€-EUR</a></li>
           </ul>
         </li>
+
+        <!-- Language Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <img [src]="selectedLanguage === 'Español' ? 'assets/language/flag-spain.png' : 'assets/language/flag-england.png'"
@@ -55,4 +67,3 @@
     </div>
   </div>
 </nav>
-
