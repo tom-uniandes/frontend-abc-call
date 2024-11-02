@@ -18,13 +18,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SolutionsDialogComponent } from '../solutions-dialog/solutions-dialog.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchIncidentComponent } from './search-incident/search-incident.component';
 
 
 @NgModule({
   declarations: [
     CreateIncidentComponent,
     IncidentDetailComponent,
-    SolutionsDialogComponent
+    SolutionsDialogComponent,
+    SearchIncidentComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +50,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   exports: [
     CreateIncidentComponent,
     IncidentDetailComponent,
-    SolutionsDialogComponent
+    SolutionsDialogComponent,
+    SearchIncidentComponent
   ]
 })
 export class IncidentsModule { }

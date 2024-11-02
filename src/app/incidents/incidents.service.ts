@@ -28,8 +28,8 @@ export class IncidentsService {
    * @param id The ID of the incident.
    * @returns An observable containing the incident details.
    */
-  getIncident(id: number): Observable<Incident> {
-    return this.http.get<Incident>(`${this.apiUrl}/get_incident/${id}`);
+  getIncident(id: string, company: string): Observable<Incident> {
+    return this.http.get<Incident>(`${this.apiUrl}/get_incident/${id}/${company}`);
   }
 
   /**
@@ -37,8 +37,8 @@ export class IncidentsService {
    * @param userId The ID of the user.
    * @returns An observable containing the user details.
    */
-  getUser(userId: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/get_user/${userId}`);
+  getUser(userId: string, company: string): Observable<User> {
+    return this.http.get<User>(`${this.apiUrl}/get_user/${userId}/${company}`);
   }
 
   /**
@@ -48,5 +48,14 @@ export class IncidentsService {
    */
   createUser(user: User): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/create_user`, user);
+  }
+
+  /**
+   * Gets all incidents for a company.
+   * @param company The name of the company.
+   * @returns An observable containing the list of incidents.
+   */
+  getIncidents(company: string): Observable<Incident[]> {
+    return this.http.get<Incident[]>(`${this.apiUrl}/get_incidents/${company}`);
   }
 }

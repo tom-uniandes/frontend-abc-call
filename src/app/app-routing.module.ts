@@ -7,6 +7,7 @@ import { RegisterClientComponent } from './register/register-client/register-cli
 import { RegisterAgentComponent } from './register/register-agent/register-agent.component';
 import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
 import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
+import { SearchIncidentComponent } from './incidents/search-incident/search-incident.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterClientComponent, pathMatch: 'full' },
   { path: 'register-agent', component: RegisterAgentComponent, pathMatch: 'full' },
   { path:'incidents/create-incident', component: CreateIncidentComponent, pathMatch: 'full'},
+  { path: 'incidents/search-incident', component: SearchIncidentComponent, pathMatch: 'full'},
+  { path: 'incidents/incident-detail/:id', component: IncidentDetailComponent, pathMatch: 'full'},
   { path: '**', redirectTo: '/login' }  // Wildcard route for a 404 page
 ];
 

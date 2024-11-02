@@ -1,20 +1,18 @@
-/* Add left margin to all items */
 h1, p {
-  margin-left: 20px; /* Adjust the margin as needed */
-}
-
-/* Style for the buttons */
-button {
-  border-radius: 20px; /* Rounded corners */
-  color: white; /* White text */
-  background-color: #2A2D6D; /* Space Cadet fill color */
-  padding: 10px 20px; /* Padding for the buttons */
-  border: none; /* Remove default border */
-  cursor: pointer; /* Pointer on hover */
+  margin-left: 20px;
 }
 
 button {
-  background-color: #3a506b !important; /* Set the button color to match the primary color */
+  border-radius: 20px;
+  color: white;
+  background-color: #2A2D6D;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button {
+  background-color: #3a506b !important;
   color: white !important;
 }
 
@@ -32,4 +30,3 @@ button:hover {
   font-weight: normal;
   font-size: 15px;
 }
-

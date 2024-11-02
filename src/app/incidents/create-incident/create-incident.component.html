@@ -6,14 +6,23 @@
       <div class="col-12 d-flex justify-content-end">
         <mat-card class="p-3 shadow-sm bg-light rounded">
           <div class="fw-bold">Tiempo transcurrido</div>
-          <div>00:01:26</div>
+          <div>{{ formattedTime }}</div>
         </mat-card>
+      </div>
+    </div>
+
+    <!-- Start/Stop Buttons -->
+    <div class="row mt-2">
+      <div class="col-12 d-flex justify-content-end">
+        <button mat-raised-button color="primary" (click)="toggleTimer()">
+          {{ timerRunning ? 'Detener' : (timeElapsed > 0 ? 'Continuar' : 'Empezar') }}
+        </button>
       </div>
     </div>
   </div>
 
   <form [formGroup]="incidentForm" (ngSubmit)="createIncident()">
-    <div class="incident-form">
+    <div class="incident-form" [class.disabled]="!timerRunning">
       <div class="row mb-2">
         <div class="col-12">
           <label for="usuario" class="me-2 w-100">Usuario:</label>
@@ -21,10 +30,10 @@
             <mat-form-field appearance="outline" class="flex-grow-1 me-2">
               <input matInput formControlName="userId" placeholder="Número de cédula (id) del usuario" readonly>
             </mat-form-field>
-            <button mat-icon-button class="me-2" type="button" (click)="toggleSearch()">
+            <button mat-icon-button class="me-2" type="button" (click)="toggleSearch()" [disabled]="!timerRunning">
               <mat-icon>search</mat-icon>
             </button>
-            <button mat-icon-button class="btn-circle" type="button" (click)="toggleUserCreation()">
+            <button mat-icon-button class="btn-circle" type="button" (click)="toggleUserCreation()" [disabled]="!timerRunning">
               <mat-icon>add</mat-icon>
             </button>
           </div>
