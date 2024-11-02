@@ -35,7 +35,7 @@ export class RegisterAgentComponent implements OnInit {
   createUserAgent(userAgent: UserAgent): void {
 
     userAgent.rol = "AGENTE"
-    userAgent.company = "uniandes"
+    userAgent.company = sessionStorage.getItem("abcall-company") || ""
     if (this.userAgentForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {
@@ -51,6 +51,8 @@ export class RegisterAgentComponent implements OnInit {
       .subscribe(() => {
         this.toastr.success('Nuevo agente registrado correctamente');
         console.log('User agent created');
+        this.router.navigateByUrl('/ruta-privada', {skipLocationChange: true}).then(()=>
+        this.router.navigate(["register-agent"]));
     },
     error => {
       console.error('Error al registrar el agente:', error);
