@@ -13,11 +13,11 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse group-options" id="navbarNav">
+    <div [ngStyle]="styleGroupOptions" class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <!-- Incidents Dropdown -->
-        <li class="nav-item dropdown">
-          <a i18n class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li *ngIf="showIncidents" class="nav-item dropdown">
+          <a i18n class="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Incidentes
           </a>
           <ul class="dropdown-menu">
@@ -25,20 +25,20 @@
             <li><a i18n class="dropdown-item" href="/incidents/search-incident">Buscar</a></li>
           </ul>
         </li>
-        
-        <li class="nav-item">
+
+        <li *ngIf="showAnalytics" class="nav-item">
           <a i18n class="nav-link active" href="/analitica/reporte">Dashboard</a>
         </li>
-        <li class="nav-item">
-          <a i18n class="nav-link active" href="/clients/manage-plan">Mi plan</a>
-        </li>
-        <li class="nav-item">
+        <li *ngIf="showAgents" class="nav-item">
           <a i18n class="nav-link active" href="/register-agent">Agentes</a>
+        </li>
+        <li *ngIf="showPlan" class="nav-item">
+          <a i18n class="nav-link active" href="/clients/manage-plan">Mi plan</a>
         </li>
 
         <!-- Currency Dropdown -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <li *ngIf="showChangeMoney" class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             {{selectedMoney}}
           </a>
           <ul class="dropdown-menu menu-money">

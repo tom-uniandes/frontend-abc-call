@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterClientComponent, pathMatch: 'full' },
   { path: 'register-agent', component: RegisterAgentComponent, pathMatch: 'full' },
-  { path:'incidents/create-incident', component: CreateIncidentComponent, pathMatch: 'full'},
+  { path: 'incidents/create-incident', component: CreateIncidentComponent, pathMatch: 'full'},
   { path: 'incidents/search-incident', component: SearchIncidentComponent, pathMatch: 'full'},
   { path: 'incidents/incident-detail/:id', component: IncidentDetailComponent, pathMatch: 'full'},
   { path: '**', redirectTo: '/login' }  // Wildcard route for a 404 page

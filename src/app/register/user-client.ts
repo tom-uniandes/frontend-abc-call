@@ -5,6 +5,8 @@ export class UserClient {
   idType: string;
   phoneNumber: string;
   company: string;
+  rol: string;
+  password: string;
 
   constructor(
     name: string,
@@ -13,6 +15,8 @@ export class UserClient {
     idType: string,
     phoneNumber: string,
     company: string,
+    rol: string,
+    password: string
   ) {
     this.name = name;
     this.email = email;
@@ -20,6 +24,7 @@ export class UserClient {
     this.idType = idType;
     this.phoneNumber = phoneNumber;
     this.company = company;
+    this.rol = rol;
+    this.password = password;
   }
-
 }

@@ -42,8 +42,17 @@ export class LoginComponent implements OnInit {
     this.authenticationService.verifyLogin(login)
       .subscribe((response) => {
         sessionStorage.setItem("abcall-token", response.token);
+        sessionStorage.setItem("abcall-company", response.company);
+        sessionStorage.setItem("abcall-rol", response.rol);
+        sessionStorage.setItem("abcall-plan", response.plan);
         this.toastr.success('Bienvenido');
-        this.router.navigateByUrl('/clients/manage-plan');
+        if(response.rol == "CLIENTE") {
+          this.router.navigateByUrl('/clients/manage-plan');
+        }
+
+        if(response.rol == "AGENTE") {
+          this.router.navigateByUrl('/incidents/create-incident');
+        }
     },
     error => {
       console.error('Error al iniciar sesión:', error);
