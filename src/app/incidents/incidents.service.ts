@@ -58,4 +58,14 @@ export class IncidentsService {
   getIncidents(company: string): Observable<Incident[]> {
     return this.http.get<Incident[]>(`${this.apiUrl}/get_incidents/${company}`);
   }
+
+   /**
+   * Creates a new incident.
+   * @param incident The incident to be created.
+   * @returns An observable containing the created incident.
+   */
+   update_incident_response(incident: any): Observable<Incident> {
+    return this.http.put<Incident>(`${this.apiUrl}/update_incident_response`, incident);
+  }
+
 }

@@ -1,9 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SolutionsService, CardContent } from './solutions.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import { ToastrService } from 'ngx-toastr'; // Import ToastrService
+import { IncidentsService } from '../incidents/incidents.service';
 
 @Component({
   selector: 'app-solutions-dialog',
@@ -17,8 +16,8 @@ export class SolutionsDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<SolutionsDialogComponent>,
-    private http: HttpClient,
     private solutionsService: SolutionsService,
+    private incidentsService: IncidentsService,
     private toastr: ToastrService, // Use ToastrService
     @Inject(MAT_DIALOG_DATA) public data: { id: string, company: string }
   ) {
@@ -48,7 +47,7 @@ export class SolutionsDialogComponent implements OnInit {
       company: this.company
     };
 
-    this.http.put(`${environment.baseUrl}/incidents/update_incident_response`, requestBody).subscribe(
+    this.incidentsService.update_incident_response(requestBody).subscribe(
       (response) => {
         console.log('Card content sent successfully:', response);
         this.toastr.success('Incidente actualizado exitosamente!', 'Éxito');
@@ -57,7 +56,7 @@ export class SolutionsDialogComponent implements OnInit {
         console.error('Error sending card content:', error);
         this.toastr.error('Error al actualizar el incidente.', 'Error');
       }
-    );
+    )
   }
 
   closeDialog(): void {
