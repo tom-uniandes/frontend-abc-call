@@ -8,19 +8,92 @@ import { RegisterAgentComponent } from './register/register-agent/register-agent
 import { CreateIncidentComponent } from './incidents/create-incident/create-incident.component';
 import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
 import { SearchIncidentComponent } from './incidents/search-incident/search-incident.component';
-
+import { RoleAndPlanGuard } from './auth-guard/role-plan.guard';
 
 const routes: Routes = [
-  { path: 'clients/manage-plan', component: ManagePlanComponent,  pathMatch: 'full' },
-  { path: 'analitica/reporte', component: ReporteComponent, pathMatch: 'full' },
-  { path: 'incidents/incident-detail', component: IncidentDetailComponent, pathMatch: 'full' },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterClientComponent, pathMatch: 'full' },
-  { path: 'register-agent', component: RegisterAgentComponent, pathMatch: 'full' },
-  { path: 'incidents/create-incident', component: CreateIncidentComponent, pathMatch: 'full'},
-  { path: 'incidents/search-incident', component: SearchIncidentComponent, pathMatch: 'full'},
-  { path: 'incidents/incident-detail/:id', component: IncidentDetailComponent, pathMatch: 'full'},
-  { path: '**', redirectTo: '/login' }  // Wildcard route for a 404 page
+  {
+    path: 'login',
+    component: LoginComponent,
+    pathMatch: 'full'
+  },
+  { path: 'register',
+    component: RegisterClientComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'clients/manage-plan',
+    component: ManagePlanComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['CLIENTE'],
+      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: 'analitica/reporte',
+    component: ReporteComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['CLIENTE'],
+      plans: ['EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: 'incidents/incident-detail',
+    component: IncidentDetailComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['AGENTE'],
+      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: 'register-agent',
+    component: RegisterAgentComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['CLIENTE'],
+      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: 'incidents/create-incident',
+    component: CreateIncidentComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['AGENTE'],
+      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: 'incidents/search-incident',
+    component: SearchIncidentComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['AGENTE'],
+      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: 'incidents/incident-detail/:id',
+    component: IncidentDetailComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: ['AGENTE'],
+      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+    }
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
+  }  // Wildcard route for a 404 page
 ];
 
 @NgModule({
