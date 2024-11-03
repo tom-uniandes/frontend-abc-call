@@ -1,29 +1,20 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from '../../environments/environment'
+import { Observable } from 'rxjs';
+import { ResponseAuthorization } from './response-authorization';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getUserRole(): string {
-    const role = sessionStorage.getItem('abcall-rol');
-    if (role) {
-      return role;
-    }
-    return '';
-  }
+  verifyAuthorization(): Observable<ResponseAuthorization> {
+    const token = sessionStorage.getItem("abcall-token");
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-  getUserPlan(): string {
-    const plan = sessionStorage.getItem('abcall-plan');
-    if (plan) {
-      return plan;
-    }
-    return '';
-  }
-
-  hasAccess(role: string, plan: string): boolean {
-    return this.getUserRole() === role && this.getUserPlan() === plan;
+    return this.http.get<ResponseAuthorization>(`${environment.baseUrl}/auth/verify-authorization`, { headers });
   }
 }
