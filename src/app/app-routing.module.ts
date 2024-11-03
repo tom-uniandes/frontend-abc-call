@@ -26,8 +26,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['CLIENTE'],
-      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "CLIENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {
@@ -36,8 +37,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['CLIENTE'],
-      plans: ['EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "CLIENTE": ['EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {
@@ -46,8 +48,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['AGENTE'],
-      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {
@@ -56,8 +59,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['CLIENTE'],
-      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "CLIENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {
@@ -66,8 +70,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['AGENTE'],
-      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {
@@ -76,8 +81,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['AGENTE'],
-      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {
@@ -86,8 +92,9 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [RoleAndPlanGuard],
     data: {
-      roles: ['AGENTE'],
-      plans: ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS']
+      roles: {
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+      }
     }
   },
   {

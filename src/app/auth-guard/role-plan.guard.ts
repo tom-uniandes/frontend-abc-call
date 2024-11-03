@@ -13,14 +13,13 @@ export class RoleAndPlanGuard implements CanActivate {
     private toastr: ToastrService,) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    const allowedRoles = route.data['roles'] as string[];
-    const allowedPlans = route.data['plans'] as string[];
+    const allowedRoles = route.data['roles'];
 
     const userRole = this.authService.getUserRole();
     const userPlan = this.authService.getUserPlan();
 
-    const hasRequiredRole = allowedRoles.includes(userRole);
-    const hasRequiredPlan = allowedPlans.includes(userPlan);
+    const hasRequiredRole = userRole in allowedRoles;
+    const hasRequiredPlan = allowedRoles[userRole]?.includes(userPlan);
 
     if (!hasRequiredRole || !hasRequiredPlan) {
       this.toastr.info('Verifica si el plan ' + userPlan?.toLowerCase() + " y el rol pueden acceder a esta funcionalidad");

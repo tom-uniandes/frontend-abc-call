@@ -17,10 +17,7 @@ export class ManagePlanComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (sessionStorage.getItem("abcall-rol") != "CLIENTE") {
-      this.toastr.error('Acceso denegado');
-      this.location.back();
-    }
+    
   }
 
   changePlan(plan: string) {
