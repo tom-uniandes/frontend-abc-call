@@ -10,11 +10,11 @@
   font-weight: normal;
   font-size: 28px;
   color: black;
-  margin-top: 13%;
-  padding-bottom: 5%;
+  margin-top: 10%;
+  padding-bottom: 7%;
 }
 
-.card-inicio-sesion {
+.card-registrarse {
   width: 90%;
   margin-left: 5%;
   margin-bottom: 10%;
@@ -56,46 +56,28 @@ button {
   font-size: 15px;
 }
 
-.iniciar-sesion {
-  margin-left: 30%;
-  margin-top: 10%;
-}
-
 .registrarse {
-  margin-left: 30%;
+  margin-left: 28%;
   margin-top: 8%;
   margin-bottom: 10%;
 }
 
-.btn-iniciar-sesion {
-  border-radius: 100px;
-  width: 180px;
-  height: 40px;
-  background-color: #1c2451;
-  text-transform: capitalize;
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  font-size: 15px;
-}
-
-.btn-iniciar-sesion:hover {
-  background-color: #3a506b;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.olvidaste-contrasena-text {
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  color: black;
-  font-size: 14px;
-  text-decoration: none;
-}
-
-.contrasena-olvidada {
-  margin-left: 32%;
-  margin-top: 4%;
-}
 
 .form-label {
   margin-left: 3%;
+}
+
+
+.input-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-group select {
+  max-width: 30%;
+  margin-right: 3%;
+}
+
+.input-group input {
+  flex: 1;
 }
