@@ -17,6 +17,6 @@ export class AnaliticaService {
     if (filters) {
       parametros = filters
     }
-    return this.http.get<ResultadoIncidente>('http://localhost:5005/analitica/get_incidents', { params: parametros, headers: headers})
+    return this.http.get<ResultadoIncidente>('http://analitica-microservice:5005/analitica/get_incidents/1', { params: parametros, headers: headers})
   }
 }
