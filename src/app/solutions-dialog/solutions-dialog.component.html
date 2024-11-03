@@ -9,7 +9,7 @@
   <div class="card-container">
     <div *ngFor="let card of cardContents" class="card">
       <p>{{ card.text }}</p>
-      <button mat-button class="select-button">Select</button>
+      <button mat-button class="select-button" (click)="sendCardContent(card)">Select</button>
     </div>
   </div>
 </div>
