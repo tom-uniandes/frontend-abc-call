@@ -1,10 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SolutionsService, CardContent } from './solutions.service';
-import { HttpClient } from '@angular/common/http'; // Import HttpClient.
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
 
 @Component({
   selector: 'app-solutions-dialog',
@@ -20,7 +19,7 @@ export class SolutionsDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<SolutionsDialogComponent>,
     private http: HttpClient,
     private solutionsService: SolutionsService,
-    private snackBar: MatSnackBar,
+    private toastr: ToastrService, // Use ToastrService
     @Inject(MAT_DIALOG_DATA) public data: { id: string, company: string }
   ) {
     this.incidentId = data.id;
@@ -44,8 +43,7 @@ export class SolutionsDialogComponent implements OnInit {
 
   sendCardContent(card: CardContent): void {
     const requestBody = {
-      isSolved: true,
-      description: card.text,
+      response: card.text,
       incidentId: this.incidentId,
       company: this.company
     };
@@ -53,15 +51,11 @@ export class SolutionsDialogComponent implements OnInit {
     this.http.post(`${environment.baseUrl}/update_incident_response`, requestBody).subscribe(
       (response) => {
         console.log('Card content sent successfully:', response);
-        this.snackBar.open('Incidente actualizado exitosamente!', 'Cerrar', {
-          duration: 3000
-        });
+        this.toastr.success('Incidente actualizado exitosamente!', 'Éxito');
       },
       (error) => {
         console.error('Error sending card content:', error);
-        this.snackBar.open('Error al actualizar el incidente.', 'Cerrar', {
-          duration: 3000
-        });
+        this.toastr.error('Error al actualizar el incidente.', 'Error');
       }
     );
   }
