@@ -48,7 +48,7 @@ export class SolutionsDialogComponent implements OnInit {
       company: this.company
     };
 
-    this.http.post(`${environment.baseUrl}/update_incident_response`, requestBody).subscribe(
+    this.http.put(`${environment.baseUrl}/incidents/update_incident_response`, requestBody).subscribe(
       (response) => {
         console.log('Card content sent successfully:', response);
         this.toastr.success('Incidente actualizado exitosamente!', 'Éxito');
