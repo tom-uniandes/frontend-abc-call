@@ -27,7 +27,7 @@ export class AnaliticaService {
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage;
     if (error.error instanceof ErrorEvent) {
       // Client-side error
       errorMessage = `Client-side error: ${error.error.message}`;
