@@ -39,7 +39,6 @@ export class NavbarComponent implements OnInit {
       this.accessResourceEmprendedorPlus();
     }
 
-    console.log('Ruta actual:', this.router.url);
   }
 
   accessResourceEmpresario() {
@@ -100,7 +99,14 @@ export class NavbarComponent implements OnInit {
 
   filterCurrentClient() {
     this.currentClient = client
-      .filter(client => client.name = "Uniandes")
+      .filter(client => client.name === this.getNameCompany() || "")
+
+    if (this.currentClient.length == 0)
+      this.currentClient = [{ name: 'unknown', pathLogo: "assets/logo-client/logo-unknown.png" }]
+  }
+
+  getNameCompany() {
+      return sessionStorage.getItem("abcall-company")
   }
 
   logout() {
@@ -115,7 +121,7 @@ interface Client {
 }
 
 const client: Client[] = [
-  { name: 'Uniandes', pathLogo: "assets/logo-client/logo-uniandes.png" }
+  { name: 'uniandes', pathLogo: "assets/logo-client/logo-uniandes.png" }
 ];
 
 
