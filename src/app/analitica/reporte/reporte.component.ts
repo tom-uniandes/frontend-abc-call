@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {ChartConfiguration, ChartOptions, Chart, registerables} from "chart.js";
 
 Chart.register(...registerables)
