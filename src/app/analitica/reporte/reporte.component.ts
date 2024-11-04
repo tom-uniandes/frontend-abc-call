@@ -8,6 +8,7 @@ import {BaseChartDirective} from "ng2-charts";
 import { MenuModule } from "../../menu/menu.module";
 import {Agente, FilterIncidente} from "../model";
 import {AnaliticaService} from "../services/analitica.service";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -23,7 +24,10 @@ import {AnaliticaService} from "../services/analitica.service";
 })
 export class ReporteComponent {
 
-  analiticaService = inject(AnaliticaService)
+  constructor(
+    private toastr: ToastrService,
+    private analiticaService: AnaliticaService) {
+  }
 
   agentes: Agente[] = [
     {'id': 1, 'nombre': 'Tomas'},
@@ -54,7 +58,7 @@ export class ReporteComponent {
 
   canales = [
     {'id': 1, 'label': 'Web'},
-    {'id': 2, 'label': 'Movil'},
+    {'id': 2, 'label': 'Mobile'},
     {'id': 3, 'label': 'Correo'},
     {'id': 4, 'label': 'Telefono'}
   ]
@@ -91,19 +95,29 @@ export class ReporteComponent {
     if (this.tipoIncidente) {
       filtrado.tipoIncidente = this.tipoIncidente;
     }
-    this.analiticaService.getIncidents(filtrado).subscribe({
-      next: value => {
+    const company = this.getCompanyFromSession();
+    if (company) {
+      this.analiticaService.getIncidents(company, filtrado).subscribe({
+        next: value => {
 
-        this.total_usuarios = value.total_usuarios;
-        this.incidentes_resueltos = value.incidentes_resueltos;
-        this.total_incidentes = value.total_incidentes
-        this.setDataXCanal(value.incidentes_canal)
-        this.setDataSinSolucion(value.sin_solucion)
-        this.setDataConSolucion(value.con_solucion)
-        this.listaIncSinSolucion = value.lista_agentes
-      }
-    })
+          this.total_usuarios = value.total_usuarios;
+          this.incidentes_resueltos = value.incidentes_resueltos;
+          this.total_incidentes = value.total_incidentes
+          this.setDataXCanal(value.incidentes_canal)
+          this.setDataSinSolucion(value.sin_solucion)
+          this.setDataConSolucion(value.con_solucion)
+          this.listaIncSinSolucion = value.lista_agentes
+        }
+      })
+    } else {
+      this.toastr.warning('No company found in session', 'Warning');
+    }
 
+  }
+
+  getCompanyFromSession(): string | null {
+    const company = sessionStorage.getItem("abcall-company");
+    return company || null;
   }
 
   initDiagramaIncXcanal() {
