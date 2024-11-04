@@ -2,7 +2,7 @@
 
 export interface Agente {
   id: number;
-  nombre: string;
+  name: string;
 }
 
 export interface Resultados {
@@ -30,6 +30,7 @@ export interface ResultadoIncidente {
   sin_solucion: number[];
   con_solucion: number[];
   lista_agentes: string[];
+  agentes: Agente[];
 }
 /***
  {

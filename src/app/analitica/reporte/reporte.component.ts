@@ -29,12 +29,7 @@ export class ReporteComponent {
     private analiticaService: AnaliticaService) {
   }
 
-  agentes: Agente[] = [
-    {'id': 1, 'nombre': 'Tomas'},
-    {'id': 2, 'nombre': 'Santiago'},
-    {'id': 3, 'nombre': 'Andres'},
-    {'id': 4, 'nombre': 'Alvaro'},
-  ];
+  agentes: Agente[] = [];
 
   fechaInicio: any = '';
   fechaFin: any = '';
@@ -98,8 +93,8 @@ export class ReporteComponent {
     const company = this.getCompanyFromSession();
     if (company) {
       this.analiticaService.getIncidents(company, filtrado).subscribe({
-        next: value => {
-
+        next: (value) => {
+          this.agentes = value.agentes;
           this.total_usuarios = value.total_usuarios;
           this.incidentes_resueltos = value.incidentes_resueltos;
           this.total_incidentes = value.total_incidentes
@@ -107,6 +102,8 @@ export class ReporteComponent {
           this.setDataSinSolucion(value.sin_solucion)
           this.setDataConSolucion(value.con_solucion)
           this.listaIncSinSolucion = value.lista_agentes
+        }, error: error => {
+          this.toastr.error('Error al consultar analitica de incidentes: ' + error);
         }
       })
     } else {
@@ -188,10 +185,6 @@ export class ReporteComponent {
         }
       ]
     };
-  }
-
-  getAgentes(): Array<Agente> {
-    return this.agentes;
   }
 
 }
