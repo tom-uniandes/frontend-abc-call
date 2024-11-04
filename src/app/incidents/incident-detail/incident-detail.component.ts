@@ -39,6 +39,7 @@ export class IncidentDetailComponent implements OnInit {
     this.dialog.open(SolutionsDialogComponent, {
       width: '80%', // Use a percentage for responsive design
       maxWidth: '800px', // Set a max width for larger screens
+      data: this.incident
     });
   }
 

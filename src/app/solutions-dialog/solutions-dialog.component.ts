@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
-import { HttpClient } from '@angular/common/http';
-
-interface CardContent {
-  text: string;
-}
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SolutionsService, CardContent } from './solutions.service';
+import { ToastrService } from 'ngx-toastr'; // Import ToastrService
+import { IncidentsService } from '../incidents/incidents.service';
 
 @Component({
   selector: 'app-solutions-dialog',
@@ -13,31 +11,52 @@ interface CardContent {
 })
 export class SolutionsDialogComponent implements OnInit {
   cardContents: CardContent[] = [];
+  incidentId: string;
+  company: string;
 
   constructor(
     public dialogRef: MatDialogRef<SolutionsDialogComponent>,
-    private http: HttpClient
-  ) {}
+    private solutionsService: SolutionsService,
+    private incidentsService: IncidentsService,
+    private toastr: ToastrService, // Use ToastrService
+    @Inject(MAT_DIALOG_DATA) public data: { id: string, company: string }
+  ) {
+    this.incidentId = data.id;
+    this.company = data.company;
+  }
 
   ngOnInit(): void {
     this.fetchCardContents();
   }
 
   fetchCardContents(): void {
-    this.http.get<CardContent[]>('https://api.example.com/card-contents')
-      .subscribe(
-        (data) => {
-          this.cardContents = data;
-        },
-        () => {
-          // Fallback data in case of error
-          this.cardContents = [
-            { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-            { text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-          ];
-        }
-      );
+    this.solutionsService.getCardContents().subscribe(
+      (data) => {
+        this.cardContents = data;
+      },
+      (error) => {
+        console.error('Error fetching card contents:', error);
+      }
+    );
+  }
+
+  sendCardContent(card: CardContent): void {
+    const requestBody = {
+      response: card.text,
+      incidentId: this.incidentId,
+      company: this.company
+    };
+
+    this.incidentsService.update_incident_response(requestBody).subscribe(
+      (response) => {
+        console.log('Card content sent successfully:', response);
+        this.toastr.success('Incidente actualizado exitosamente!', 'Éxito');
+      },
+      (error) => {
+        console.error('Error sending card content:', error);
+        this.toastr.error('Error al actualizar el incidente.', 'Error');
+      }
+    )
   }
 
   closeDialog(): void {
