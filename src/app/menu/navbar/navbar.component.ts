@@ -47,6 +47,7 @@ export class NavbarComponent implements OnInit {
       this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
       this.showPlan = true
       this.showAgents = true
+      this.showAnalytics = true
     }
 
     if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
@@ -61,7 +62,6 @@ export class NavbarComponent implements OnInit {
       this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
       this.showPlan = true
       this.showAgents = true
-      this.showAnalytics = true
     }
 
     if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
