@@ -35,7 +35,7 @@
         <div class="d-flex flex-row-reverse mx-2">
           <div class="px-2">
             <p class="m-0">Total Incidentes:</p>
-            <p class="m-0">{{resultados.length}}</p>
+            <p class="m-0">{{total_incidentes}}</p>
           </div>
           <div class="px-2">
             <p class="m-0">Incidentes Resueltos:</p>
@@ -54,7 +54,7 @@
               <p>Agentes con más incidentes sin resolver</p>
               <ul>
                 @for (agente of listaIncSinSolucion; track $index) {
-                  <li>{{agente.nombre}}: {{agente.sinSolucion}}</li>
+                  <li>{{agente}}</li>
                 }
               </ul>
             </div>

@@ -3,25 +3,12 @@ import {ChartConfiguration, ChartOptions, Chart, registerables} from "chart.js";
 
 Chart.register(...registerables)
 
-import data from '../incidentes_data.json';
 import {FormsModule} from "@angular/forms";
 import {BaseChartDirective} from "ng2-charts";
 import { MenuModule } from "../../menu/menu.module";
-
-interface Agente {
-  id: number;
-  nombre: string;
-}
-
-interface Resultados {
-  id:string;
-  fecha:string;
-  idAgente: string;
-  idUsuario:number;
-  tipoIncidente:number;
-  resuelto:boolean;
-  canal:number;
-}
+import {Agente, FilterIncidente} from "../model";
+import {AnaliticaService} from "../services/analitica.service";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -37,7 +24,11 @@ interface Resultados {
 })
 export class ReporteComponent {
 
-  resultados: Resultados[]=[];
+  constructor(
+    private toastr: ToastrService,
+    private analiticaService: AnaliticaService) {
+  }
+
   agentes: Agente[] = [
     {'id': 1, 'nombre': 'Tomas'},
     {'id': 2, 'nombre': 'Santiago'},
@@ -52,6 +43,7 @@ export class ReporteComponent {
 
   total_usuarios = 0
   incidentes_resueltos = 0
+  total_incidentes = 0
 
   dataIncXCanal: any = null;
   opcIncXCanal: any = null;
@@ -62,23 +54,23 @@ export class ReporteComponent {
   dataIncSinSolucion: any = null;
   opcIncSinSolucion: any = null;
 
-  listaIncSinSolucion: any[] = [];
+  listaIncSinSolucion: string[] = [];
 
   canales = [
     {'id': 1, 'label': 'Web'},
-    {'id': 2, 'label': 'Movil'},
+    {'id': 2, 'label': 'Mobile'},
     {'id': 3, 'label': 'Correo'},
     {'id': 4, 'label': 'Telefono'}
   ]
 
   dias_semana = [
-    "Domingo",
     "Lunes",
     "Martes",
     "Miercoles",
     "Jueves",
     "Viernes",
-    "Sabado"
+    "Sabado",
+    "Domingo"
   ]
 
   ngOnInit(): void {
@@ -90,75 +82,42 @@ export class ReporteComponent {
   }
 
   loadchartdata() {
-    this.resultados = <Resultados[]> Object.assign([], data)
-      .filter((value: Resultados) => {
-        return this.fechaInicio ? new Date(value.fecha) >= new Date(this.fechaInicio) : true
-      })
-      .filter((value: Resultados) => {
-        return this.fechaFin ? new Date(value.fecha) <= new Date(this.fechaFin) : true
-      })
-      .filter((value: Resultados) => {
-        return this.tipoIncidente ? value.tipoIncidente == this.tipoIncidente : true
-      })
-      .filter((value: Resultados) => {
-        return this.agente ? value.idAgente == this.agente : true
-      })
+    let filtrado : FilterIncidente = new FilterIncidente();
+    if (this.agente) {
+      filtrado.agenteId = this.agente;
+    }
+    if (this.fechaInicio) {
+      filtrado.fechaInicio = this.fechaInicio;
+    }
+    if (this.fechaFin) {
+      filtrado.fechaFin = this.fechaFin;
+    }
+    if (this.tipoIncidente) {
+      filtrado.tipoIncidente = this.tipoIncidente;
+    }
+    const company = this.getCompanyFromSession();
+    if (company) {
+      this.analiticaService.getIncidents(company, filtrado).subscribe({
+        next: value => {
 
-    this.total_usuarios = new Set(this.resultados.map(x => x.idUsuario)).size
-    this.incidentes_resueltos = this.resultados.filter(x => x.resuelto).length
+          this.total_usuarios = value.total_usuarios;
+          this.incidentes_resueltos = value.incidentes_resueltos;
+          this.total_incidentes = value.total_incidentes
+          this.setDataXCanal(value.incidentes_canal)
+          this.setDataSinSolucion(value.sin_solucion)
+          this.setDataConSolucion(value.con_solucion)
+          this.listaIncSinSolucion = value.lista_agentes
+        }
+      })
+    } else {
+      this.toastr.warning('No company found in session', 'Warning');
+    }
 
-    this.calcularDataXCanal()
-    this.calcularDataSinSolucion()
-    this.calcularDataConSolucion()
-    this.calcularDataAgentes(2)
   }
 
-  // DIAGRAMA DE INCIDENTES POR CANAL
-  calcularDataXCanal() {
-    let contador = new Array(this.canales.length);
-    this.resultados.forEach( value => {
-      const {canal} = value;
-      const index = this.canales.findIndex(x => x.id == canal);
-      if (index >= 0) {
-        contador[index] = (contador[index] || 0) + 1;
-      }
-    })
-    this.setDataXCanal(contador)
-  }
-
-  // DIAGRAMA DE INCIDENTES NO RESUELTOS POR SEMANA
-  calcularDataSinSolucion() {
-    let contador = new Array(this.dias_semana.length);
-    this.resultados.filter(value => !value.resuelto).forEach( value => {
-      const diaSemana = new Date(value.fecha).getDay();
-      contador[diaSemana] = (contador[diaSemana] || 0) + 1;
-    })
-    this.setDataSinSolucion(contador)
-  }
-
-  // DIAGRAMA DE INCIDENTES RESUELTOS POR SEMANA
-  calcularDataConSolucion() {
-    let contador = new Array(this.dias_semana.length);
-    this.resultados.filter(value => value.resuelto).forEach( value => {
-      const diaSemana = new Date(value.fecha).getDay();
-      contador[diaSemana] = (contador[diaSemana] || 0) + 1;
-    })
-    this.setDataConSolucion(contador)
-  }
-
-  // Calcular incidentes sin resolver por agente
-  calcularDataAgentes(n=2) {
-    let contador:any = {};
-    this.agentes.forEach( value => {
-      contador[value.id] = {...value, 'sinSolucion': 0}
-    })
-    this.resultados.filter(value => !value.resuelto).forEach( value => {
-      const idAgente =value.idAgente;
-      if (contador.hasOwnProperty(idAgente)) {
-        contador[idAgente]['sinSolucion'] += 1;
-      }
-    })
-    this.listaIncSinSolucion = Object.values(contador).sort((a: any, b: any) => b['sinSolucion'] - a['sinSolucion']).slice(0, n);
+  getCompanyFromSession(): string | null {
+    const company = sessionStorage.getItem("abcall-company");
+    return company || null;
   }
 
   initDiagramaIncXcanal() {
