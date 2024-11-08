@@ -27,7 +27,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "CLIENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "CLIENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
@@ -38,7 +38,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "CLIENTE": ['EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "CLIENTE": ['EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
@@ -60,7 +60,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "CLIENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "CLIENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
@@ -71,7 +71,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
@@ -82,7 +82,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
@@ -93,7 +93,7 @@ const routes: Routes = [
     canActivate: [RoleAndPlanGuard],
     data: {
       roles: {
-        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRENDEDOR_PLUS'],
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
   },
