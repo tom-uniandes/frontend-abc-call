@@ -27,51 +27,37 @@ export class NavbarComponent implements OnInit {
       this.router.navigateByUrl("/login")
     }
 
-    if(sessionStorage.getItem("abcall-plan") == "EMPRENDEDOR") {
-      this.accessResourceEmprendedor();
+    let plan = sessionStorage.getItem("abcall-plan") || ""
+    let rol = sessionStorage.getItem("abcall-rol") || ""
+    if(plan == "EMPRENDEDOR") {
+      this.accessResourceEmprendedor(rol);
     }
 
-    if(sessionStorage.getItem("abcall-plan") == "EMPRESARIO") {
-      this.accessResourceEmpresario();
+    if(plan == "EMPRESARIO") {
+      this.accessResourceEmpresario(rol);
     }
 
-    if(sessionStorage.getItem("abcall-plan") == "EMPRESARIO_PLUS") {
-      this.accessResourceEmpresarioPlus();
-    }
-
-  }
-
-  accessResourceEmprendedor() {
-    if(sessionStorage.getItem("abcall-rol") == "CLIENTE") {
-      this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "25%"} : {"margin-left": "31%"}
-      this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
-      this.showPlan = true
-      this.showAgents = true
-    }
-
-    if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
-      this.styleGroupOptions = {"margin-left": "43%"}
-      this.showIncidents = true
+    if(plan == "EMPRESARIO_PLUS") {
+      this.accessResourceEmpresarioPlus(rol);
     }
   }
 
-  accessResourceEmpresario() {
-    if(sessionStorage.getItem("abcall-rol") == "CLIENTE") {
+  accessResourceEmprendedor(rol: string) {
+    if(rol == "CLIENTE") {
       this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "32%"} : {"margin-left": "39%"}
       this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
       this.showPlan = true
       this.showAgents = true
-      this.showAnalytics = true
     }
 
-    if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
+    if(rol == "AGENTE") {
       this.styleGroupOptions = {"margin-left": "43%"}
       this.showIncidents = true
     }
   }
 
-  accessResourceEmpresarioPlus() {
-    if(sessionStorage.getItem("abcall-rol") == "CLIENTE") {
+  accessResourceEmpresario(rol: string) {
+    if(rol == "CLIENTE") {
       this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "25%"} : {"margin-left": "31%"}
       this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
       this.showPlan = true
@@ -79,14 +65,29 @@ export class NavbarComponent implements OnInit {
       this.showAnalytics = true
     }
 
-    if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
+    if(rol == "AGENTE") {
+      this.styleGroupOptions = {"margin-left": "43%"}
+      this.showIncidents = true
+    }
+  }
+
+  accessResourceEmpresarioPlus(rol: string) {
+    if(rol == "CLIENTE") {
+      this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "25%"} : {"margin-left": "31%"}
+      this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
+      this.showPlan = true
+      this.showAgents = true
+      this.showAnalytics = true
+    }
+
+    if(rol == "AGENTE") {
       this.styleGroupOptions = {"margin-left": "43%"}
       this.showIncidents = true
     }
   }
 
   selectedLanguage = 'Español';
-  selectedMoney = '$-COP';
+  selectedMoney = sessionStorage.getItem("abcall-money") || '$-COP';
   currentClient: Client[] = [];
 
   changeLanguage(language: string) {
@@ -94,7 +95,30 @@ export class NavbarComponent implements OnInit {
   }
 
   changeMoney(money: string) {
+
+    if (money == "$-COP") {
+      sessionStorage.setItem("abcall-money", "$-COP")
+      sessionStorage.setItem("abcall-money-emprendedor", "COP 99.000")
+      sessionStorage.setItem("abcall-money-empresario", "COP 149.000")
+      sessionStorage.setItem("abcall-money-empresario-plus", "COP 199.000")
+    }
+
+    if (money == "USD") {
+      sessionStorage.setItem("abcall-money", "USD")
+      sessionStorage.setItem("abcall-money-emprendedor", "USD 22,47")
+      sessionStorage.setItem("abcall-money-empresario", "USD 31,37")
+      sessionStorage.setItem("abcall-money-empresario-plus", "USD 45,17")
+    }
+
+    if (money == "€-EUR") {
+      sessionStorage.setItem("abcall-money", "€-EUR")
+      sessionStorage.setItem("abcall-money-emprendedor", "EUR 20,85")
+      sessionStorage.setItem("abcall-money-empresario", "EUR 33,82")
+      sessionStorage.setItem("abcall-money-empresario-plus", "EUR 41,90")
+    }
+
     this.selectedMoney = money;
+    window.location.reload()
   }
 
   filterCurrentClient() {

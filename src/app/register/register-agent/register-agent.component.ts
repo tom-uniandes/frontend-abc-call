@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { RegisterService } from '../register.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from 'ngx-toastr';
+import * as CryptoJS from 'crypto-js';
+
 
 @Component({
   selector: 'app-register-agent',
@@ -34,8 +36,6 @@ export class RegisterAgentComponent implements OnInit {
 
   createUserAgent(userAgent: UserAgent): void {
 
-    userAgent.rol = "AGENTE"
-    userAgent.company = sessionStorage.getItem("abcall-company") || ""
     if (this.userAgentForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {
@@ -47,6 +47,14 @@ export class RegisterAgentComponent implements OnInit {
       return;
     }
 
+    let password = userAgent.password.trim()
+    let hash = CryptoJS.SHA3(password, { outputLength: 256 });
+    userAgent.password = hash.toString(CryptoJS.enc.Hex);
+
+    userAgent.rol = "AGENTE"
+    userAgent.company = sessionStorage.getItem("abcall-company") || ""
+    userAgent.plan = sessionStorage.getItem("abcall-plan") || ""
+
     this.registerService.createUserAgent(userAgent)
       .subscribe(() => {
         this.toastr.success('Nuevo agente registrado correctamente');
@@ -55,6 +63,7 @@ export class RegisterAgentComponent implements OnInit {
         this.router.navigate(["register-agent"]));
     },
     error => {
+      userAgent.password = password
       console.error('Error al registrar el agente:', error);
       const errorMessage = error.error?.message || 'Ocurrió un error al registrar el nuevo agente';
       this.toastr.error(errorMessage);

@@ -6,6 +6,7 @@ export class UserAgent {
   phoneNumber: string;
   company: string;
   rol: string;
+  plan: string;
   password: string;
 
   constructor(
@@ -16,6 +17,7 @@ export class UserAgent {
     phoneNumber: string,
     company: string,
     rol: string,
+    plan: string,
     password: string
   ) {
     this.name = name;
@@ -25,6 +27,7 @@ export class UserAgent {
     this.phoneNumber = phoneNumber;
     this.company = company;
     this.rol = rol;
+    this.plan = plan;
     this.password = password;
   }
 }
