@@ -35,10 +35,24 @@ export class NavbarComponent implements OnInit {
       this.accessResourceEmpresario();
     }
 
-    if(sessionStorage.getItem("abcall-plan") == "EMPRENDEDOR_PLUS") {
-      this.accessResourceEmprendedorPlus();
+    if(sessionStorage.getItem("abcall-plan") == "EMPRESARIO_PLUS") {
+      this.accessResourceEmpresarioPlus();
     }
 
+  }
+
+  accessResourceEmprendedor() {
+    if(sessionStorage.getItem("abcall-rol") == "CLIENTE") {
+      this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "25%"} : {"margin-left": "31%"}
+      this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
+      this.showPlan = true
+      this.showAgents = true
+    }
+
+    if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
+      this.styleGroupOptions = {"margin-left": "43%"}
+      this.showIncidents = true
+    }
   }
 
   accessResourceEmpresario() {
@@ -56,21 +70,7 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  accessResourceEmprendedor() {
-    if(sessionStorage.getItem("abcall-rol") == "CLIENTE") {
-      this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "25%"} : {"margin-left": "31%"}
-      this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
-      this.showPlan = true
-      this.showAgents = true
-    }
-
-    if(sessionStorage.getItem("abcall-rol") == "AGENTE") {
-      this.styleGroupOptions = {"margin-left": "43%"}
-      this.showIncidents = true
-    }
-  }
-
-  accessResourceEmprendedorPlus() {
+  accessResourceEmpresarioPlus() {
     if(sessionStorage.getItem("abcall-rol") == "CLIENTE") {
       this.styleGroupOptions = this.router.url === '/clients/manage-plan' ? {"margin-left": "25%"} : {"margin-left": "31%"}
       this.showChangeMoney = this.router.url === '/clients/manage-plan' ? true : false
