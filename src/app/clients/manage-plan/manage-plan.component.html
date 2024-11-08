@@ -10,9 +10,10 @@
       </ul>
     </mat-card-content>
     <div class="card-footer">
-      <h3>COP 99.000/mes</h3>
+      <h3>{{priceEmprendedor}}/mes</h3>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="changePlan('EMPRENDEDOR')">Suscribirse</button>
+        <button *ngIf="showSubscribeEmprendedor" mat-raised-button color="primary" (click)="changePlan('EMPRENDEDOR')">Suscribirse</button>
+        <button *ngIf="showPlanEmprendedorSelected" mat-raised-button color="primary" disabled="">Plan actual</button>
       </mat-card-actions>
     </div>
   </mat-card>
@@ -27,9 +28,10 @@
       </ul>
     </mat-card-content>
     <div class="card-footer">
-      <h3>COP 149.000/mes</h3>
+      <h3>{{priceEmpresario}}/mes</h3>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="changePlan('EMPRESARIO')">Suscribirse</button>
+        <button *ngIf="showSubscribeEmpresario" mat-raised-button color="primary" (click)="changePlan('EMPRESARIO')">Suscribirse</button>
+        <button *ngIf="showPlanEmpresarioSelected" mat-raised-button color="primary" disabled="">Plan actual</button>
       </mat-card-actions>
     </div>
   </mat-card>
@@ -45,9 +47,10 @@
       </ul>
     </mat-card-content>
     <div class="card-footer">
-      <h3>COP 199.000/mes</h3>
+      <h3>{{priceEmpresarioPlus}}/mes</h3>
       <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="changePlan('EMPRESARIO_PLUS')">Suscribirse</button>
+        <button *ngIf="showSubscribeEmpresarioPlus" mat-raised-button color="primary" (click)="changePlan('EMPRESARIO_PLUS')">Suscribirse</button>
+        <button *ngIf="showPlanEmpresarioPlusSelected" mat-raised-button color="primary" disabled="">Plan actual</button>
       </mat-card-actions>
     </div>
   </mat-card>

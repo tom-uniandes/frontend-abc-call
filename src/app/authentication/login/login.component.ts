@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { RequestLogin } from '../request-login';
+import * as CryptoJS from 'crypto-js';
 
 @Component({
   selector: 'app-login',
@@ -39,6 +40,11 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    let password = login.password.trim()
+    let hash = CryptoJS.SHA3(password, { outputLength: 256 });
+    login.password = hash.toString(CryptoJS.enc.Hex);
+    login.email.trim()
+
     this.authenticationService.verifyLogin(login)
       .subscribe((response) => {
         sessionStorage.setItem("abcall-token", response.token);
@@ -55,6 +61,7 @@ export class LoginComponent implements OnInit {
         }
     },
     error => {
+      login.password = password
       console.error('Error al iniciar sesión:', error);
       const errorMessage = error.error?.message || 'Ocurrió un error al iniciar sesión';
       this.toastr.error(errorMessage);

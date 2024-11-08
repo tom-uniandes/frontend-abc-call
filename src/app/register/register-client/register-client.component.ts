@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { RegisterService } from '../register.service';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ToastrService } from 'ngx-toastr';
+import * as CryptoJS from 'crypto-js';
 
 
 @Component({
@@ -36,8 +37,6 @@ export class RegisterClientComponent implements OnInit {
   }
 
   createUserClient(userClient: UserClient): void {
-
-    userClient.rol = "CLIENTE"
     if (this.userClientForm.invalid) {
       const invalidFields = Array.from(document.getElementsByClassName('ng-invalid')) as HTMLElement[];
       if (invalidFields.length > 1) {
@@ -49,13 +48,20 @@ export class RegisterClientComponent implements OnInit {
       return;
     }
 
+    let password = userClient.password.trim()
+    let hash = CryptoJS.SHA3(password, { outputLength: 256 });
+    userClient.password = hash.toString(CryptoJS.enc.Hex);
+
+    userClient.rol = "CLIENTE"
+    userClient.plan = "EMPRESARIO"
+
     this.registerService.createUserClient(userClient)
       .subscribe(() => {
         this.toastr.success('Registro exitoso');
-        console.log('User client created');
         this.router.navigateByUrl('/login');
     },
     error => {
+      userClient.password = password
       console.error('Error al crear el usuario:', error);
       const errorMessage = error.error?.message || 'Ocurrió un error al crear el usuario';
       this.toastr.error(errorMessage);
