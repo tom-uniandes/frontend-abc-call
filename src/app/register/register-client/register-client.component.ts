@@ -53,7 +53,7 @@ export class RegisterClientComponent implements OnInit {
     userClient.password = hash.toString(CryptoJS.enc.Hex);
 
     userClient.rol = "CLIENTE"
-    userClient.plan = "EMPRESARIO"
+    userClient.plan = "EMPRENDEDOR"
 
     this.registerService.createUserClient(userClient)
       .subscribe(() => {
