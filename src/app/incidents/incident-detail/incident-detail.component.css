@@ -1,0 +1,32 @@
+h1, p {
+  margin-left: 20px;
+}
+
+button {
+  border-radius: 20px;
+  color: white;
+  background-color: #2A2D6D;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button {
+  background-color: #3a506b !important;
+  color: white !important;
+}
+
+button:hover {
+  background-color: #1c2451 !important;
+}
+
+.mat-raised-button {
+  border-radius: 100px;
+  width: 180px;
+  height: 40px;
+  background-color: #1c2451;
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+}

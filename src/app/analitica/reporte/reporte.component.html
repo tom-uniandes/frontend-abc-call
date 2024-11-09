@@ -24,8 +24,8 @@
         <label for="agente">Agente:</label>
         <select [(ngModel)]="agente" class="form-control" id="agente" (change)="loadchartdata()">
           <option value="">Todos</option>
-          @for (agente of getAgentes(); track agente.id){
-          <option [value]="agente.id">{{agente.nombre}}</option>
+          @for (agente of agentes; track agente.id){
+          <option [value]="agente.id">{{agente.name}}</option>
           }
         </select>
       </div>
@@ -35,7 +35,7 @@
         <div class="d-flex flex-row-reverse mx-2">
           <div class="px-2">
             <p class="m-0">Total Incidentes:</p>
-            <p class="m-0">{{resultados.length}}</p>
+            <p class="m-0">{{total_incidentes}}</p>
           </div>
           <div class="px-2">
             <p class="m-0">Incidentes Resueltos:</p>
@@ -54,7 +54,7 @@
               <p>Agentes con más incidentes sin resolver</p>
               <ul>
                 @for (agente of listaIncSinSolucion; track $index) {
-                  <li>{{agente.nombre}}: {{agente.sinSolucion}}</li>
+                  <li>{{agente}}</li>
                 }
               </ul>
             </div>

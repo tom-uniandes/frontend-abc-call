@@ -1,0 +1,56 @@
+.mat-dialog-container {
+  padding: 20px; /* Padding around the entire dialog */
+  max-width: 90vw; /* Set a maximum width relative to viewport */
+  overflow-x: hidden; /* Hide horizontal overflow */
+}
+
+.card-container {
+  margin: 20px; /* Space between cards and the dialog edges */
+  display: flex;
+  flex-direction: column; /* Stack cards vertically */
+  gap: 10px; /* Increase the space between cards */
+}
+
+/* Additional styles for card */
+.card {
+  border: 1px solid #ccc;
+  padding: 15px; /* Space within each card */
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  display: flex; /* Flexbox for aligning items */
+  justify-content: space-between; /* Space between text and button */
+  align-items: center; /* Center vertically */
+  box-sizing: border-box; /* Include padding and border in width */
+  flex: 1; /* Allow the card to grow/shrink */
+  min-width: 0; /* Prevent flex items from exceeding container */
+}
+
+.select-button {
+  margin-left: 10px; /* Margin for spacing */
+}
+
+.select-button {
+  background-color: #3A506B; /* Custom background color */
+  color: white; /* White text */
+  border-radius: 5px; /* Rounded corners */
+}
+
+/* Optional: Add hover effect */
+.select-button:hover {
+  background-color: #2A3A4D; /* Darker shade on hover */
+}
+
+h1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+  margin-bottom: 20px; /* Space below the header */
+}
+
+.content-container {
+  padding: 20px; /* Padding around the content */
+  max-width: 100%; /* Prevent content from exceeding the dialog */
+  overflow: hidden; /* Prevent overflow */
+}

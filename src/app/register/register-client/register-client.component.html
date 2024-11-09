@@ -6,30 +6,77 @@
           <div>
             <h3 class="title text-center">ABCall</h3>
           </div>
-          <form>
-            <div class="form-outline border campos">
+          <form [formGroup]="userClientForm" (ngSubmit)="createUserClient(userClientForm.value)">
+
+            <!--Name-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-user"></i>
-              <label class="form-label" for="txtNombre">Nombre</label>
-              <input type="text" id="txtNombre" class="form-control" required/>
+              <label class="form-label" for="name">Nombre</label>
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                formControlName="name"
+                [ngClass]="{'border-danger': userClientForm.get('name')?.invalid && userClientForm.get('name')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('name')?.invalid && userClientForm.get('name')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('name')?.errors?.['required']">El nombre es requerido</div>
+                <div *ngIf="userClientForm.get('name')?.errors?.['maxLength']">No debe tener más de 150 caracteres</div>
+              </div>
             </div>
-            <div class="form-outline border campos">
+
+            <div class="form-outline campos">
               <i class="fa-solid fa-passport"></i>
               <label class="form-label" for="txtTipoIdentificacion">Tipo de identificación</label>
-              <select class="form-select">
-                <option value="Cedula de ciudadania">Cédula de ciudadania</option>
-                <option value="Cedula de extranjeria">Cédula de extranjeria</option>
+              <select class="form-select"
+                  id="idType"
+                  formControlName="idType"
+                  [ngClass]="{'border-danger': userClientForm.get('idType')?.invalid && userClientForm.get('idType')?.touched}"
+                >
+                <option value="" selected hidden>Seleccione una opción</option>
+                <option value="CEDULA_CIUDADANIA">Cédula de ciudadania</option>
+                <option value="CEDULA_EXTRANJERIA">Cédula de extranjeria</option>
               </select>
+              <div *ngIf="userClientForm.get('idType')?.invalid && userClientForm.get('idType')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('idType')?.errors?.['required']">Debe seleccionar una opción</div>
+              </div>
             </div>
-            <div class="form-outline border campos">
+
+            <!--Number of identification-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-passport"></i>
-              <label class="form-label" for="txtNumeroIdentificacion">Numero de identificacion</label>
-              <input type="text" id="txtNumeroIdentificacion" class="form-control" required/>
+              <label class="form-label" for="idNumber">Número de identificación</label>
+              <input
+                type="text"
+                id="idNumber"
+                class="form-control"
+                formControlName="idNumber"
+                [ngClass]="{'border-danger': userClientForm.get('idNumber')?.invalid && userClientForm.get('idNumber')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('idNumber')?.invalid && userClientForm.get('idNumber')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('idNumber')?.errors?.['required']">El número de identificación es requerido</div>
+              </div>
             </div>
-            <div class="form-outline border campos">
+
+            <!--Email-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-envelope"></i>
-              <label class="form-label" for="txtCorreo">Correo electronico</label>
-              <input type="text" id="txtCorreo" class="form-control" required/>
+              <label class="form-label" for="email">Correo electronico</label>
+              <input
+                type="text"
+                id="email"
+                class="form-control"
+                formControlName="email"
+                [ngClass]="{'border-danger': userClientForm.get('email')?.invalid && userClientForm.get('email')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('email')?.invalid && userClientForm.get('email')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('email')?.errors?.['required']">El correo es requerido</div>
+                <div *ngIf="userClientForm.get('email')?.errors?.['maxLength']">No debe tener más de 130 caracteres</div>
+                <div *ngIf="userClientForm.get('email')?.errors?.['email']">Debe ingresar un correo válido</div>
+              </div>
             </div>
+
+            <!--Phone-->
             <div class="form-outline campos">
               <i class="fa-solid fa-phone"></i>
               <label class="form-label" for="txtCorreo">Telefono</label>
@@ -38,23 +85,59 @@
                   <option value="+1">+1</option>
                   <option value="+57">+57</option>
                 </select>
-                <input type="text" id="txtCorreo" class="form-control" required/>
+                <input
+                  type="text"
+                  id="phoneNumber"
+                  class="form-control"
+                  formControlName="phoneNumber"
+                  [ngClass]="{'border-danger': userClientForm.get('phoneNumber')?.invalid && userClientForm.get('phoneNumber')?.touched}"
+                />
+              </div>
+              <div *ngIf="userClientForm.get('phoneNumber')?.invalid && userClientForm.get('phoneNumber')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['required']">El teléfono es requerido</div>
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['maxLength']">No debe tener más de 50 caracteres</div>
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['pattern']">Deben ser solo números</div>
               </div>
             </div>
-            <div class="form-outline border campos">
+
+            <!--Company-->
+            <div class="form-outline campos">
               <i class="fa-solid fa-briefcase"></i>
-              <label class="form-label" for="txtEmpresa">Empresa</label>
-              <input type="text" id="txtEmpresa" class="form-control" required/>
+              <label class="form-label" for="company">Empresa</label>
+              <input
+                type="text"
+                id="company"
+                class="form-control"
+                formControlName="company"
+                [ngClass]="{'border-danger': userClientForm.get('company')?.invalid && userClientForm.get('company')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('company')?.invalid && userClientForm.get('company')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('company')?.errors?.['required']">La empresa es requerida</div>
+                <div *ngIf="userClientForm.get('company')?.errors?.['maxLength']">No debe tener más de 60 caracteres</div>
+              </div>
             </div>
+
+            <!--Password-->
             <div class="form-outline border campos">
               <i class="fa-solid fa-key"></i>
-              <label class="form-label" for="txtContrasena">Contraseña</label>
-              <input type="password" id="txtContrasena" class="form-control" required/>
+              <label class="form-label" for="password">Contraseña</label>
+              <input
+                type="password"
+                id="password"
+                class="form-control"
+                formControlName="password"
+                [ngClass]="{'border-danger': userClientForm.get('password')?.invalid && userClientForm.get('password')?.touched}"
+              />
+              <div *ngIf="userClientForm.get('password')?.invalid && userClientForm.get('password')?.touched" class="text-danger">
+                <div *ngIf="userClientForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
+                <div *ngIf="userClientForm.get('password')?.errors?.['minLength']">No debe tener menos de 8 caracteres</div>
+                <div *ngIf="userClientForm.get('password')?.errors?.['maxLength']">No debe tener más de 20 caracteres</div>
+              </div>
+            </div>
+            <div class="registrarse">
+              <button i18n type="submit" class="btn btn-primary btn-registrarse">Registrarse</button>
             </div>
           </form>
-            <div class="registrarse">
-              <a href="/registrarse" class="btn btn-primary btn-registrarse">Registrarse</a>
-            </div>
         </div>
       </div>
     </div>
