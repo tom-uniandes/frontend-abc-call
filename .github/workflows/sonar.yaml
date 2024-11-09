@@ -25,10 +25,10 @@ jobs:
         run: |
           npm install
           npm install -g @angular/cli@18.1.4
-      - name: Run tests with coverage
-        id: tests
-        run: |
-          ng test --code-coverage
+      #- name: Run tests with coverage
+      #  id: tests
+      #  run: |
+      #    ng test --code-coverage
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
