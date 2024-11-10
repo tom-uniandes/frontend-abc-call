@@ -68,4 +68,7 @@ export class IncidentsService {
     return this.http.put<Incident>(`${this.apiUrl}/update_incident_response`, incident);
   }
 
+  searchIncident(incident: Incident): Observable<Incident> {
+    return this.http.post<Incident>(`${this.apiUrl}/search_incident`, incident);
+  }
 }
