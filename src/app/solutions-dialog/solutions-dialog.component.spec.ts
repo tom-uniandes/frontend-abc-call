@@ -1,32 +1,57 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { SolutionsDialogComponent } from './solutions-dialog.component';
 import { of, throwError } from 'rxjs';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { SolutionsService } from './solutions.service';
+import { IncidentsService } from '../incidents/incidents.service';
+import { InjectionToken } from '@angular/core';
 
-class MockMatDialogRef {
-  close(): void {}
+const dialogDataMock = {
+  id: '12345',
+  company: 'XYZ Inc.'
 }
+
+class MatDialogRefMock {
+  close(result?: any): void {
+    console.log('Dialog closed with result:', result);
+  }
+}
+
+export const MAT_MDC_DIALOG_DATA = new InjectionToken<any>('MatMdcDialogData');
 
 describe('SolutionsDialogComponent', () => {
   let component: SolutionsDialogComponent;
   let fixture: ComponentFixture<SolutionsDialogComponent>;
   let httpClientSpy: { get: jasmine.Spy };
 
-  beforeEach(async () => {
+  beforeEach(waitForAsync(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-
-    await TestBed.configureTestingModule({
-      declarations: [SolutionsDialogComponent],
-      imports: [HttpClientModule],
-      providers: [
-        { provide: MatDialogRef, useClass: MockMatDialogRef },
-        { provide: HttpClient, useValue: httpClientSpy }
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule,
+        ToastrModule.forRoot(),
+        MatDialogModule
       ],
-    }).compileComponents();
+      declarations: [
+        SolutionsDialogComponent
+      ],
+      providers: [
+        SolutionsService,
+        IncidentsService,
+        { provide: MatDialogRef, useClass: MatDialogRefMock },
+        { provide: MAT_MDC_DIALOG_DATA, useValue: dialogDataMock },
+        ToastrService
+      ]
+    })
+    .compileComponents();
+  }));
 
+  beforeEach(() => {
     fixture = TestBed.createComponent(SolutionsDialogComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create the component', () => {
