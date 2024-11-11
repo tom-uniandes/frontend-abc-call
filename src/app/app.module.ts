@@ -13,10 +13,12 @@ import { ToastrModule } from 'ngx-toastr';
 import { IncidentsModule } from './incidents/incidents.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { FooterModule } from './footer/footer.module';
+import { HomeComponent } from './home/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,27 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand">
+      <img i18n src="assets/logo-page/logo-abcall.png" alt="Logo de ABCall" width="60" height="40">
+    </a>
+    <a i18n class="navbar-brand title-navbar">ABCall</a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <!-- Language Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img [src]="selectedLanguage === 'Español' ? 'assets/language/flag-spain.png' : 'assets/language/flag-england.png'"
+                  alt="Selección de lenguaje"
+                  width="30" height="20">
+            </a>
+            <ul class="dropdown-menu menu-language">
+              <li><a class="dropdown-item" (click)="changeLanguage('Español')">Español</a></li>
+              <li><a class="dropdown-item" (click)="changeLanguage('English')">English</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a i18n class="nav-link active" href="/home">Inicio</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+</nav>
