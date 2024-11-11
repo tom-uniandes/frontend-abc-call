@@ -7,7 +7,7 @@ export class Incident {
     channel: string;
     agentId: string;
     company: string;
-    solved: boolean = false;
+    solved: boolean;
 
     constructor(id: number, type: string, description: string, date: Date, userId: number, channel: string, agentId: string, company: string, solved: boolean){
         this.id = id;

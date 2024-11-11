@@ -1,0 +1,38 @@
+a {
+  font-size: 110%;
+}
+
+.dropdown-menu {
+  background-color: #0b132b;
+}
+
+.dropdown-item {
+  color: #ffffff;
+}
+
+.menu-language {
+  margin-top: 18%;
+  margin-right: 10%;
+}
+
+.dropdown-item:hover {
+  background-color: #3a506b;
+  color: #ffffff;
+}
+
+.nav-item:hover {
+  background-color: #3a506b;
+  color: #ffffff;
+  border-radius: 10%;
+}
+
+.logo-client {
+  margin-left: 6%;
+}
+
+.title-navbar {
+  margin-left: 1%;
+  margin-right: 75%;
+}
+
+

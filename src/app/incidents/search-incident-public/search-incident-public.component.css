@@ -1,0 +1,31 @@
+.container {
+  max-width: 78%;
+  margin: 0 auto;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.incident-card {
+  background-color: #e9ecef;
+  color: #333;
+}
+
+.button-custom {
+  width: 100%;
+  border-radius: 100px;
+  background-color: #1c2451;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  margin-top: 5%;
+}
+
+.button-custom:hover {
+  background-color: #3a506b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
