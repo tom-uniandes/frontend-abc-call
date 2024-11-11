@@ -19,6 +19,7 @@ import { SolutionsDialogComponent } from '../solutions-dialog/solutions-dialog.c
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchIncidentComponent } from './search-incident/search-incident.component';
+import { SearchIncidentPublicComponent } from './search-incident-public/search-incident-public.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { SearchIncidentComponent } from './search-incident/search-incident.compo
     CreateIncidentComponent,
     IncidentDetailComponent,
     SolutionsDialogComponent,
-    SearchIncidentComponent
+    SearchIncidentComponent,
+    SearchIncidentPublicComponent
   ],
   imports: [
     CommonModule,

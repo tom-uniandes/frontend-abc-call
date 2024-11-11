@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Incident } from './incident';
 import { User } from './user'; // Assuming you have a `User` model defined
 import { environment } from '../../environments/environment';
+import { IncidentSearchPublic } from './incidents-search-public';
 
 @Injectable({
   providedIn: 'root'
@@ -68,4 +69,11 @@ export class IncidentsService {
     return this.http.put<Incident>(`${this.apiUrl}/update_incident_response`, incident);
   }
 
+  searchIncident(incident: Incident): Observable<Incident> {
+    return this.http.post<Incident>(`${this.apiUrl}/search_incident`, incident);
+  }
+
+  searchIncidentPublic(incident: IncidentSearchPublic): Observable<IncidentSearchPublic> {
+    return this.http.post<IncidentSearchPublic>(`${this.apiUrl}/search_incident`, incident);
+  }
 }

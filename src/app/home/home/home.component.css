@@ -1,0 +1,41 @@
+.button-custom {
+  width: 40%;
+  border-radius: 100px;
+  background-color: #1c2451;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal;
+  font-size: 15px;
+  margin-top: 5%;
+}
+
+.button-custom:hover {
+  background-color: #3a506b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  background-color: #eaeaea;
+  border-color: #ffffff;
+}
+
+.text-question {
+  margin-top: 10%;
+  margin-bottom: 3%;
+}
+
+.title {
+  margin-top: 8%;
+}
+
+.last-button {
+  margin-bottom: 10%;
+}
+
+.card {
+  margin-top: 5%;
+}
+

@@ -9,8 +9,15 @@ import { CreateIncidentComponent } from './incidents/create-incident/create-inci
 import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
 import { SearchIncidentComponent } from './incidents/search-incident/search-incident.component';
 import { RoleAndPlanGuard } from './auth-guard/role-plan.guard';
+import { HomeComponent } from './home/home/home.component';
+import { SearchIncidentPublicComponent } from './incidents/search-incident-public/search-incident-public.component';
 
 const routes: Routes = [
+  {
+    path: 'home',
+    component: HomeComponent,
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     component: LoginComponent,
@@ -96,6 +103,16 @@ const routes: Routes = [
         "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
+  },
+  {
+    path: 'search-incident',
+    component: SearchIncidentPublicComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
   },
   {
     path: '**',
