@@ -10,6 +10,7 @@ import { IncidentDetailComponent } from './incidents/incident-detail/incident-de
 import { SearchIncidentComponent } from './incidents/search-incident/search-incident.component';
 import { RoleAndPlanGuard } from './auth-guard/role-plan.guard';
 import { HomeComponent } from './home/home/home.component';
+import { SearchIncidentPublicComponent } from './incidents/search-incident-public/search-incident-public.component';
 
 const routes: Routes = [
   {
@@ -102,6 +103,11 @@ const routes: Routes = [
         "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
       }
     }
+  },
+  {
+    path: 'search-incident',
+    component: SearchIncidentPublicComponent,
+    pathMatch: 'full',
   },
   {
     path: '',

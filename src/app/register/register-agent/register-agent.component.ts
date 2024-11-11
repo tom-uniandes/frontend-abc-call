@@ -58,9 +58,8 @@ export class RegisterAgentComponent implements OnInit {
     this.registerService.createUserAgent(userAgent)
       .subscribe(() => {
         this.toastr.success('Nuevo agente registrado correctamente');
-        console.log('User agent created');
-        this.router.navigateByUrl('/ruta-privada', {skipLocationChange: true}).then(()=>
-        this.router.navigate(["register-agent"]));
+        this.userAgentForm.reset()
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     },
     error => {
       userAgent.password = password
