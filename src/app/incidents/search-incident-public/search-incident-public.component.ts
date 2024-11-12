@@ -28,7 +28,7 @@ export class SearchIncidentPublicComponent implements OnInit {
   }
 
   viewIncidentDetail(incidentId: string): void {
-    //this.router.navigate(['/incident-detail', incidentId]);
+    this.router.navigate(['/public/incident-detail', incidentId]);
   }
 
   searchIncident(): void {
@@ -56,8 +56,8 @@ export class SearchIncidentPublicComponent implements OnInit {
         }
       },
       (error) => {
-        const errorMessage = error.error?.message || 'Ocurrió un error al iniciar sesión';
-        this.toastr.info("No se encontró el incidente");
+        let errorMessage = error.error?.message || 'Ocurrió algún error al buscar el incidente, intente nuevamente';
+        this.toastr.error(errorMessage);
       }
     );
 
@@ -65,5 +65,6 @@ export class SearchIncidentPublicComponent implements OnInit {
 
   cleanField() {
     this.searchForm.reset()
+    this.incidents = []
   }
 }

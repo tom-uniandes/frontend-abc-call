@@ -68,7 +68,8 @@ export class SearchIncidentComponent implements OnInit {
           }
         },
         (error) => {
-          this.toastr.error('No se pudo realizar la búsqueda de incidentes', 'Error');
+          let errorMessage = error.error?.message || 'Ocurrió algún error al buscar el incidente, intente nuevamente';
+          this.toastr.error(errorMessage);
         }
       );
     } else {

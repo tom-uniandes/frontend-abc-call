@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Incident } from './incident';
 import { User } from './user'; // Assuming you have a `User` model defined
 import { environment } from '../../environments/environment';
-import { IncidentSearchPublic } from './incidents-search-public';
+import { IncidentPublic } from './incidents-public';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +31,15 @@ export class IncidentsService {
    */
   getIncident(id: string, company: string): Observable<Incident> {
     return this.http.get<Incident>(`${this.apiUrl}/get_incident/${id}/${company}`);
+  }
+
+  /**
+   * Get an incident by ID without login.
+   * @param id The ID of the incident.
+   * @returns An observable containing the incident details.
+   */
+  getIncidentPublic(id: string): Observable<IncidentPublic> {
+    return this.http.get<IncidentPublic>(`${this.apiUrl}/public/get_incident/${id}`);
   }
 
   /**
@@ -73,7 +82,7 @@ export class IncidentsService {
     return this.http.post<Incident>(`${this.apiUrl}/search_incident`, incident);
   }
 
-  searchIncidentPublic(incident: IncidentSearchPublic): Observable<IncidentSearchPublic> {
-    return this.http.post<IncidentSearchPublic>(`${this.apiUrl}/search_incident`, incident);
+  searchIncidentPublic(incident: IncidentPublic): Observable<IncidentPublic> {
+    return this.http.post<IncidentPublic>(`${this.apiUrl}/public/search_incident`, incident);
   }
 }

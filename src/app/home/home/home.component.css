@@ -1,8 +1,7 @@
 .button-custom {
   width: 40%;
   border-radius: 100px;
-  background-color: #1c2451;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: #3a506b;
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -11,7 +10,7 @@
 }
 
 .button-custom:hover {
-  background-color: #3a506b;
+  background-color: #1c2451;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
