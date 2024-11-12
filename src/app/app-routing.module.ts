@@ -11,6 +11,7 @@ import { SearchIncidentComponent } from './incidents/search-incident/search-inci
 import { RoleAndPlanGuard } from './auth-guard/role-plan.guard';
 import { HomeComponent } from './home/home/home.component';
 import { SearchIncidentPublicComponent } from './incidents/search-incident-public/search-incident-public.component';
+import { IncidentDetailPublicComponent } from './incidents/incident-detail-public/incident-detail-public.component';
 
 const routes: Routes = [
   {
@@ -105,8 +106,13 @@ const routes: Routes = [
     }
   },
   {
-    path: 'search-incident',
+    path: 'public/search-incident',
     component: SearchIncidentPublicComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'public/incident-detail/:id',
+    component: IncidentDetailPublicComponent,
     pathMatch: 'full',
   },
   {

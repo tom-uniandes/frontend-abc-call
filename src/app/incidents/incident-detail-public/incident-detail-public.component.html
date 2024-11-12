@@ -1,0 +1,26 @@
+<app-navbar-public></app-navbar-public>
+<div class="container-fluid mt-5" *ngIf="incident">
+  <div class="row">
+    <div class="col-md-10 offset-md-1"> <!-- Wider column, centered -->
+      <h1>Detalle del incidente {{ incident.id }}</h1>
+      <hr/>
+
+      <p><strong>Fecha:</strong> {{ incident.date | date: 'dd/MM/yyyy' }}</p>
+      <p><strong>Tipo de problema:</strong> {{ incident.type }}</p>
+      <p><strong>Estado:</strong> {{ incident.solved ? 'Resuelto' : 'Abierto' }}</p>
+      <p><strong>Descripción:</strong>
+      <p>
+        {{ incident.description }}
+      </p>
+
+      <p><strong>Respuesta:</strong>
+      <p>
+        {{ incident.response }}
+      </p>
+
+      <div class="button-custom">
+        <button mat-raised-button color="primary" (click)="newSearch()">Nueva búsqueda</button>
+      </div>
+    </div>
+  </div>
+</div>
