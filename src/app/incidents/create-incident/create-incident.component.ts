@@ -44,7 +44,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
       agentId: [this.getAgentIdFromToken()],
       company: [this.getCompanyFromSession()]
     });
-    
+
     // Initially disable the incident form
     this.incidentForm.disable();
 
@@ -136,15 +136,15 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
       this.toastr.error('Por favor, complete correctamente el formulario');
       return;
     }
-  
+
     const incidentData: Incident = this.incidentForm.value;
-  
+
     this.incidentsService.createIncident(incidentData).subscribe(
       response => {
         this.toastr.success('Incidente registrado con éxito');
         this.incidentForm.reset(); // Reset the form to the initial state
         this.incidentForm.disable();
-  
+
         // adding values to channel, agentId and company
         this.incidentForm.patchValue({
           channel: this.getChannel(),
@@ -158,7 +158,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
         this.intervalId = null; // Reset intervalId
         this.timeElapsed = 0; // Reset the elapsed time
         this.formattedTime = '00:00:00'; // Reset the displayed time
-  
+
         this.router.navigateByUrl('/incidents/create-incident'); // Optionally refresh the page
       },
       (error: HttpErrorResponse) => {
@@ -168,7 +168,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
       }
     );
   }
-  
+
   // Timer controls
   toggleTimer(): void {
     if (this.timerRunning) {
@@ -202,7 +202,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
 
   // Helper methods to retrieve agent ID and company information from session or token
   getAgentIdFromToken(): string | null {
-    const token = sessionStorage.getItem("abcall-token");
+    const token = localStorage.getItem("abcall-token");
     if (!token) {
       return null;
     }
