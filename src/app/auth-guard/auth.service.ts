@@ -12,7 +12,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   verifyAuthorization(): Observable<ResponseAuthorization> {
-    const token = sessionStorage.getItem("abcall-token");
+    const token = localStorage.getItem("abcall-token");
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<ResponseAuthorization>(`${environment.baseUrl}/auth/verify-authorization`, { headers });

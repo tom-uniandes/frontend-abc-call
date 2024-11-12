@@ -44,6 +44,7 @@ export class RoleAndPlanGuard implements CanActivate {
         return true;
       }),
       catchError((error) => {
+        localStorage.clear()
         sessionStorage.clear()
         this.toastr.error("La sesión expiró");
         this.router.navigate(['/login']);

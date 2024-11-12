@@ -21,8 +21,9 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    const token = sessionStorage.getItem("abcall-token");
+    const token = localStorage.getItem("abcall-token");
     if (!token) {
+      localStorage.clear()
       sessionStorage.clear()
       this.router.navigateByUrl("/login")
     }
@@ -134,6 +135,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
+    localStorage.clear()
     sessionStorage.clear()
     this.router.navigateByUrl("/home")
   }
