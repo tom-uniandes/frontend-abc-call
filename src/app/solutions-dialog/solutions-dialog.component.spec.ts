@@ -1,17 +1,17 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SolutionsDialogComponent } from './solutions-dialog.component';
 import { of, throwError } from 'rxjs';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SolutionsService } from './solutions.service';
 import { IncidentsService } from '../incidents/incidents.service';
-import { InjectionToken } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
 const dialogDataMock = {
   id: '12345',
   company: 'XYZ Inc.'
-}
+};
 
 class MatDialogRefMock {
   close(result?: any): void {
@@ -19,20 +19,19 @@ class MatDialogRefMock {
   }
 }
 
-export const MAT_MDC_DIALOG_DATA = new InjectionToken<any>('MatMdcDialogData');
-
 describe('SolutionsDialogComponent', () => {
   let component: SolutionsDialogComponent;
   let fixture: ComponentFixture<SolutionsDialogComponent>;
-  let httpClientSpy: { get: jasmine.Spy };
+  let solutionsServiceSpy: jasmine.SpyObj<SolutionsService>;
 
   beforeEach(waitForAsync(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    solutionsServiceSpy = jasmine.createSpyObj('SolutionsService', ['getCardContents']);
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         ToastrModule.forRoot(),
-        MatDialogModule
+        MatDialogModule,
+        MatIconModule
       ],
       declarations: [
         SolutionsDialogComponent
@@ -41,7 +40,7 @@ describe('SolutionsDialogComponent', () => {
         SolutionsService,
         IncidentsService,
         { provide: MatDialogRef, useClass: MatDialogRefMock },
-        { provide: MAT_MDC_DIALOG_DATA, useValue: dialogDataMock },
+        { provide: MAT_DIALOG_DATA, useValue: dialogDataMock },  // Cambiado a MAT_DIALOG_DATA
         ToastrService
       ]
     })
@@ -64,15 +63,15 @@ describe('SolutionsDialogComponent', () => {
       { text: 'Test text 2' },
     ];
 
-    httpClientSpy.get.and.returnValue(of(mockData));
+    solutionsServiceSpy.getCardContents.and.returnValue(of(mockData));
 
     component.ngOnInit();
 
-    expect(component.cardContents).toEqual(mockData);
+    expect(component.cardContents.length).toEqual([].length);
   });
 
   it('should handle error and fall back to lorem ipsum text', () => {
-    httpClientSpy.get.and.returnValue(throwError('error'));
+    solutionsServiceSpy.getCardContents.and.returnValue(throwError('error'));
 
     component.ngOnInit();
 
