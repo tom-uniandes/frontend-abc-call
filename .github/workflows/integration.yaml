@@ -22,9 +22,9 @@ jobs:
         run: |
           npm install
           npm install -g @angular/cli@18.1.4
-      # - name: Run tests
-      #   run: |
-      #    ng test --code-coverage
+      - name: Run tests
+        run: |
+          ng test --code-coverage
   merge-branches:
     name: Merge Master into Develop and Develop into Master
     runs-on: ubuntu-latest

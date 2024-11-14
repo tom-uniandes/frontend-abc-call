@@ -6,6 +6,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { RegisterService } from '../register.service';
+import { NavbarPublicComponent } from '../../menu/navbar-public/navbar-public.component';
 
 describe('RegisterClientComponent', () => {
   let component: RegisterClientComponent;
@@ -21,6 +22,7 @@ describe('RegisterClientComponent', () => {
       ],
       declarations: [
         RegisterClientComponent,
+        NavbarPublicComponent
       ],
       providers: [
         RegisterService
