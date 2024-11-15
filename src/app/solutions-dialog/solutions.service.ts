@@ -16,7 +16,7 @@ export class SolutionsService {
   constructor(private http: HttpClient) {}
 
   getCardContents(): Observable<CardContent[]> {
-    return this.http.get<CardContent[]>(`${environment.baseUrl}/getsolutions`).pipe(
+    return this.http.get<CardContent[]>(`${environment.baseUrl}/chatbot/getsolutions`).pipe(
       catchError(() => {
         // Fallback data in case of error
         return of([
