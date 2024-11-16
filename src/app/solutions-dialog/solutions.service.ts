@@ -29,7 +29,8 @@ export class SolutionsService {
   }
 
   getCardContents(): Observable<CardContent[]> {
-    return this.http.get<CardContent[]>(`${environment.baseUrl}/chatbot/getsolutions`).pipe(
+    let headers = this.createCommonHeader()
+    return this.http.get<CardContent[]>(`${environment.baseUrl}/chatbot/getsolutions`, { headers }).pipe(
       catchError(() => {
         // Fallback data in case of error
         return of([
