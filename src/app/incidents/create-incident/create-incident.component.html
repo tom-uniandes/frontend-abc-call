@@ -2,17 +2,34 @@
 <div class="container mt-4">
   <div>
     <h2 class="header-title mb-4">Registrar incidente</h2>
-    <div class="row timer">
-      <div class="col-12 d-flex justify-content-end">
-        <mat-card class="p-3 shadow-sm bg-light rounded">
-          <div class="fw-bold">Tiempo transcurrido</div>
-          <div>{{ formattedTime }}</div>
-        </mat-card>
+    
+    <!-- reception channel -->
+    <form [formGroup]="channelForm">
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-8">
+          <label for="canal-recepcion">Canal de recepción:</label>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-select formControlName="channelSelection" (selectionChange)="onChannelChange($event.value)" placeholder="Canal de recepción">
+              <mat-option value="WEB">Web/Telefónico</mat-option>
+              <mat-option value="EMAIL">Correo</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div *ngIf="channelForm.get('channelSelection')?.invalid && channelForm.get('channelSelection')?.touched" class="text-danger">
+            <div *ngIf="channelForm.get('channelSelection')?.errors?.['required']">El canal es requerido</div>
+          </div>
+        </div>
+        <div class="col-md-4 d-flex justify-content-end" *ngIf="timerVisible">
+          <!-- elapsed time -->
+          <mat-card class="p-3 shadow-sm bg-light rounded">
+            <div class="fw-bold">Tiempo transcurrido</div>
+            <div>{{ formattedTime }}</div>
+          </mat-card>
+        </div>
       </div>
-    </div>
+    </form>
 
-    <!-- Start/Stop Buttons -->
-    <div class="row mt-2">
+    <!-- Start/Stop Buttons for WEB channel -->
+    <div class="row mt-2" *ngIf="timerVisible">
       <div class="col-12 d-flex justify-content-end">
         <button mat-raised-button color="primary" (click)="toggleTimer()">
           {{ timerRunning ? 'Detener' : (timeElapsed > 0 ? 'Continuar' : 'Empezar') }}
@@ -22,7 +39,7 @@
   </div>
 
   <form [formGroup]="incidentForm" (ngSubmit)="createIncident()">
-    <div class="incident-form" [class.disabled]="!timerRunning">
+    <div class="incident-form" [class.disabled]="!timerRunning && !formEnabledForEmail">
       <div class="row mb-2">
         <div class="col-12">
           <label for="usuario" class="me-2 w-100">Usuario:</label>
@@ -30,10 +47,10 @@
             <mat-form-field appearance="outline" class="flex-grow-1 me-2">
               <input matInput formControlName="userId" placeholder="Número de cédula (id) del usuario" readonly>
             </mat-form-field>
-            <button mat-icon-button class="me-2" type="button" (click)="toggleSearch()" [disabled]="!timerRunning">
+            <button mat-icon-button class="me-2" type="button" (click)="toggleSearch()" [disabled]="!formEnabledForEmail && !timerRunning">
               <mat-icon>search</mat-icon>
             </button>
-            <button mat-icon-button class="btn-circle" type="button" (click)="toggleUserCreation()" [disabled]="!timerRunning">
+            <button mat-icon-button class="btn-circle" type="button" (click)="toggleUserCreation()" [disabled]="!formEnabledForEmail && !timerRunning">
               <mat-icon>add</mat-icon>
             </button>
           </div>
@@ -87,7 +104,9 @@
 
       <div class="row mb-3">
         <div class="col-12 d-flex justify-content-start">
-          <button type="submit" mat-raised-button color="primary" class="btn btn-primary" [disabled]="incidentForm.invalid">Registrar</button>
+          <button type="submit" mat-raised-button color="primary" class="btn btn-primary" [disabled]="incidentForm.invalid || (!formEnabledForEmail && !timerRunning)">
+            Registrar
+          </button>
         </div>
       </div>
     </div>
