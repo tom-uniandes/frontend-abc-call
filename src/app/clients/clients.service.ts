@@ -21,7 +21,8 @@ export class ClientsService {
     let token = localStorage.getItem("abcall-token");
     return new HttpHeaders()
     .set('Authorization', `Bearer ${token}`)
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   updateClientPlan(company: string, plan: string): Observable<any> {
