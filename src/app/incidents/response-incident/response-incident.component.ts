@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Incident} from "../incident";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IncidentsService} from "../incidents.service";
