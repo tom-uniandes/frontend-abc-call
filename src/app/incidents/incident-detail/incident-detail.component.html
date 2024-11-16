@@ -13,11 +13,15 @@
         {{ incident.description }}
       </p>
 
+      @if(!incident.solved) {
       <div style="display: flex; justify-content: flex-start; margin-top: 20px;">
 
         <button mat-raised-button color="primary" (click)="viewIncidentResponse()">Responder</button>
         <button mat-raised-button class="custom-button" style="margin-left: 10px;" (click)="openSolutionsDialog()">Generar respuesta con IA</button>
       </div>
+      }@else {
+        <p><strong>Respuesta:</strong>{{incident.response}}</p>
+      }
     </div>
   </div>
 </div>
