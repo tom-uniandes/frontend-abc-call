@@ -26,6 +26,6 @@ export class AuthService {
 
   generateTransactionKey(): string {
     let hash = CryptoJS.SHA3(environment.publicKey, { outputLength: 256 });
-    return hash.toString(CryptoJS.enc.Hex);
+    return hash.toString(CryptoJS.enc.Base64);
   }
 }
