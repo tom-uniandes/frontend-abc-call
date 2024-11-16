@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class IncidentDetailComponent implements OnInit {
   incident: any = null; // To store incident data
+  show_form_response: boolean = false;
 
   constructor(
     public dialog: MatDialog,
