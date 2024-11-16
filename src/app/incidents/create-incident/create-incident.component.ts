@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./create-incident.component.css']
 })
 export class CreateIncidentComponent implements OnInit, OnDestroy {
+  channelForm!: FormGroup;
   incidentForm!: FormGroup;
   userForm!: FormGroup;
   searchForm!: FormGroup;
@@ -19,6 +20,8 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
   userCreationMode = false;
   userNotFound = false;
   user: any = null;
+  timerVisible = false;
+  formEnabledForEmail = false;
 
   // Timer variables
   timerRunning = false;
@@ -34,18 +37,23 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    // Channel form
+    this.channelForm = this.formBuilder.group({
+      channelSelection: ["", [Validators.required]],
+    });
+
     // Incident Form
     this.incidentForm = this.formBuilder.group({
       userId: ["", [Validators.required]],
       date: ["", [Validators.required]],
       type: ["", [Validators.required]],
       description: ["", [Validators.required, Validators.maxLength(300)]],
-      channel: [this.getChannel()],
+      channel: ["", [Validators.required]],
       agentId: [this.getAgentIdFromToken()],
       company: [this.getCompanyFromSession()]
     });
 
-    // Initially disable the incident form
+    // Disable the form initially
     this.incidentForm.disable();
 
     // User Form for Creating New Users
@@ -64,20 +72,57 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    // Clear the interval if the component is destroyed
     if (this.intervalId) clearInterval(this.intervalId);
   }
 
-  // Toggle search mode
-  toggleSearch(): void {
-    this.searchMode = !this.searchMode;
-    this.userCreationMode = false;
+  // Handle channel selection change
+  onChannelChange(selectedChannel: string): void {
+    if (selectedChannel === 'WEB') {
+      this.timerVisible = true;
+      this.incidentForm.disable(); // Keep the form disabled until the timer starts
+      this.formEnabledForEmail = false;
+    } else if (selectedChannel === 'EMAIL') {
+      this.timerVisible = false;
+      this.incidentForm.enable(); // Enable the form immediately for EMAIL
+      this.formEnabledForEmail = true;
+    } else {
+      this.timerVisible = false;
+      this.incidentForm.disable(); // Disable the form for unselected or other channels
+      this.stopTimer();
+      this.formEnabledForEmail = false;
+    }
+    this.incidentForm.patchValue({ channel: selectedChannel });
   }
 
-  // Toggle user creation mode
-  toggleUserCreation(): void {
-    this.userCreationMode = !this.userCreationMode;
-    this.searchMode = false;
+  // Timer controls
+  toggleTimer(): void {
+    if (this.timerRunning) {
+      this.stopTimer();
+    } else {
+      this.startTimer();
+    }
+  }
+
+  startTimer(): void {
+    this.timerRunning = true;
+    this.incidentForm.enable(); // Enable the form when the timer starts
+    this.intervalId = setInterval(() => {
+      this.timeElapsed++;
+      this.formattedTime = this.formatTime(this.timeElapsed);
+    }, 1000);
+  }
+
+  stopTimer(): void {
+    this.timerRunning = false;
+    this.incidentForm.disable(); // Disable the form when the timer stops
+    clearInterval(this.intervalId);
+  }
+
+  formatTime(seconds: number): string {
+    const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
+    const minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
+    const secs = (seconds % 60).toString().padStart(2, '0');
+    return `${hours}:${minutes}:${secs}`;
   }
 
   // Search for a user by ID
@@ -136,18 +181,17 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
       this.toastr.error('Por favor, complete correctamente el formulario');
       return;
     }
-
+  
     const incidentData: Incident = this.incidentForm.value;
-
+  
     this.incidentsService.createIncident(incidentData).subscribe(
       response => {
         this.toastr.success('Incidente registrado con éxito');
         this.incidentForm.reset(); // Reset the form to the initial state
         this.incidentForm.disable();
-
+  
         // adding values to channel, agentId and company
         this.incidentForm.patchValue({
-          channel: this.getChannel(),
           agentId: this.getAgentIdFromToken(),
           company: this.getCompanyFromSession()
         });
@@ -158,7 +202,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
         this.intervalId = null; // Reset intervalId
         this.timeElapsed = 0; // Reset the elapsed time
         this.formattedTime = '00:00:00'; // Reset the displayed time
-
+  
         this.router.navigateByUrl('/incidents/create-incident'); // Optionally refresh the page
       },
       (error: HttpErrorResponse) => {
@@ -169,37 +213,37 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
     );
   }
 
-  // Timer controls
-  toggleTimer(): void {
-    if (this.timerRunning) {
-      this.stopTimer();
+  toggleSearch(): void {
+    if (!this.formEnabledForEmail && !this.timerRunning) {
+      this.toastr.warning('Search is disabled. Start the timer or select EMAIL.');
+      return;
+    }
+    if (this.searchMode) {
+      // If already in search mode, close it
+      this.searchMode = false;
     } else {
-      this.startTimer();
+      // Open search mode and ensure user creation mode is off
+      this.searchMode = true;
+      this.userCreationMode = false;
     }
   }
-
-  startTimer(): void {
-    this.timerRunning = true;
-    this.incidentForm.enable(); // Enable the form when the timer starts
-    this.intervalId = setInterval(() => {
-      this.timeElapsed++;
-      this.formattedTime = this.formatTime(this.timeElapsed);
-    }, 1000);
+  
+  toggleUserCreation(): void {
+    if (!this.formEnabledForEmail && !this.timerRunning) {
+      this.toastr.warning('User creation is disabled. Start the timer or select EMAIL.');
+      return;
+    }
+    if (this.userCreationMode) {
+      // If already in user creation mode, close it
+      this.userCreationMode = false;
+      console.log('Exiting user creation mode:', this.userCreationMode);
+    } else {
+      // Open user creation mode and ensure search mode is off
+      this.userCreationMode = true;
+      this.searchMode = false;
+      console.log('Entering user creation mode:', this.userCreationMode);
+    }
   }
-
-  stopTimer(): void {
-    this.timerRunning = false;
-    this.incidentForm.disable(); // Disable the form when the timer stops
-    clearInterval(this.intervalId);
-  }
-
-  formatTime(seconds: number): string {
-    const hours = Math.floor(seconds / 3600).toString().padStart(2, '0');
-    const minutes = Math.floor((seconds % 3600) / 60).toString().padStart(2, '0');
-    const secs = (seconds % 60).toString().padStart(2, '0');
-    return `${hours}:${minutes}:${secs}`;
-  }
-
   // Helper methods to retrieve agent ID and company information from session or token
   getAgentIdFromToken(): string | null {
     const token = localStorage.getItem("abcall-token");
@@ -221,7 +265,4 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
     return company || null;
   }
 
-  getChannel(): string | null {
-    return "WEB";
-  }
 }
