@@ -181,15 +181,15 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
       this.toastr.error('Por favor, complete correctamente el formulario');
       return;
     }
-  
+
     const incidentData: Incident = this.incidentForm.value;
-  
+
     this.incidentsService.createIncident(incidentData).subscribe(
       response => {
         this.toastr.success('Incidente registrado con éxito');
         this.incidentForm.reset(); // Reset the form to the initial state
         this.incidentForm.disable();
-  
+
         // adding values to channel, agentId and company
         this.incidentForm.patchValue({
           agentId: this.getAgentIdFromToken(),
@@ -202,7 +202,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
         this.intervalId = null; // Reset intervalId
         this.timeElapsed = 0; // Reset the elapsed time
         this.formattedTime = '00:00:00'; // Reset the displayed time
-  
+
         this.router.navigateByUrl('/incidents/create-incident'); // Optionally refresh the page
       },
       (error: HttpErrorResponse) => {
@@ -227,7 +227,7 @@ export class CreateIncidentComponent implements OnInit, OnDestroy {
       this.userCreationMode = false;
     }
   }
-  
+
   toggleUserCreation(): void {
     if (!this.formEnabledForEmail && !this.timerRunning) {
       this.toastr.warning('User creation is disabled. Start the timer or select EMAIL.');
