@@ -1,31 +1,42 @@
-/* tslint:disable:no-unused-variable */
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ResponseIncidentComponent } from './response-incident.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { NavbarComponent } from '../../menu/navbar/navbar.component';
+import { RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { IncidentsService } from '../incidents.service';
+import { NavbarComponent } from '../../menu/navbar/navbar.component';
 
-describe('Resp', () => {
+describe('ResponseIncidentComponent', () => {
   let component: ResponseIncidentComponent;
   let fixture: ComponentFixture<ResponseIncidentComponent>;
+  let activatedRouteMock: any;
 
   beforeEach(waitForAsync(() => {
+    activatedRouteMock = {
+      snapshot: {
+        paramMap: {
+          get: (key: string) => key === 'id' ? 'some-id' : null,
+        }
+      }
+    };
+
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
         ToastrModule.forRoot(),
-        ResponseIncidentComponent,
+        RouterModule.forRoot([])
       ],
       declarations: [
-        ResponseIncidentComponent,
+        ResponseIncidentComponent, 
         NavbarComponent
       ],
       providers: [
-        IncidentsService
+        IncidentsService,
+        { provide: ActivatedRoute, useValue: activatedRouteMock }
       ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {
