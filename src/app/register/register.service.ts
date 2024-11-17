@@ -20,12 +20,14 @@ export class RegisterService {
     let token = localStorage.getItem("abcall-token");
     return new HttpHeaders()
     .set('Authorization', `Bearer ${token}`)
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   createCommonPublicHeader(): HttpHeaders {
     return new HttpHeaders()
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   createUserClient(userClient: UserClient): Observable<UserClient> {

@@ -19,7 +19,8 @@ export class AuthenticationService {
   verifyLogin(login: RequestLogin): Observable<ResponseLogin> {
     let headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
     return this.http.post<ResponseLogin>(this.apiUrl + '/login', login, { headers });
   }
 }

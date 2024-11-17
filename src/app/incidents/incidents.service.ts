@@ -23,12 +23,14 @@ export class IncidentsService {
     let token = localStorage.getItem("abcall-token");
     return new HttpHeaders()
     .set('Authorization', `Bearer ${token}`)
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   createCommonPublicHeader(): HttpHeaders {
     return new HttpHeaders()
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   /**
@@ -114,5 +116,11 @@ export class IncidentsService {
     let headers = this.createCommonPublicHeader()
     headers.set('Content-Type', 'application/json')
     return this.http.post<IncidentPublic>(`${this.apiUrl}/public/search_incident`, incident, { headers });
+  }
+  
+  updateIncidentAgent(body: any): Observable<Incident> {
+    let headers = this.createCommonHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.put<Incident>(`${this.apiUrl}/update_incident_agent`, body, { headers });
   }
 }
