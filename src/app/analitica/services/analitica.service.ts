@@ -22,7 +22,8 @@ export class AnaliticaService {
     let token = localStorage.getItem("abcall-token");
     return new HttpHeaders()
     .set('Authorization', `Bearer ${token}`)
-    .set('X-Abcall-Transaction', this.authService.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   getIncidents(company: string|null, filters: FilterIncidente|undefined): Observable<ResultadoIncidente> {

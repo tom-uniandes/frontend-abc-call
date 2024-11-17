@@ -16,7 +16,8 @@ export class AuthService {
     let token = localStorage.getItem("abcall-token");
     return new HttpHeaders()
     .set('Authorization', `Bearer ${token}`)
-    .set('X-Abcall-Transaction', this.generateTransactionKey());
+    .set('X-Abcall-Transaction', this.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
   }
 
   verifyAuthorization(): Observable<ResponseAuthorization> {
@@ -26,6 +27,6 @@ export class AuthService {
 
   generateTransactionKey(): string {
     let hash = CryptoJS.SHA3(environment.publicKey, { outputLength: 256 });
-    return hash.toString(CryptoJS.enc.Hex);
+    return hash.toString(CryptoJS.enc.Base64);
   }
 }
