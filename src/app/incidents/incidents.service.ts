@@ -115,4 +115,10 @@ export class IncidentsService {
     headers.set('Content-Type', 'application/json')
     return this.http.post<IncidentPublic>(`${this.apiUrl}/public/search_incident`, incident, { headers });
   }
+  
+  updateIncidentAgent(body: any): Observable<Incident> {
+    let headers = this.createCommonHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.put<Incident>(`${this.apiUrl}/update_incident_agent`, body, { headers });
+  }
 }
