@@ -15,7 +15,7 @@
 
       <div style="display: flex; justify-content: flex-start; margin-top: 20px;">
         <button mat-raised-button color="primary" *ngIf="incidentBelongsToAgent && replyButtonsEnabled">Responder</button>
-        <button mat-raised-button class="custom-button" style="margin-left: 10px;" (click)="openSolutionsDialog()" *ngIf="incidentBelongsToAgent && replyButtonsEnabled">Generar respuesta con IA</button>
+        <button mat-raised-button class="custom-button" style="margin-left: 10px;" (click)="openSolutionsDialog()" *ngIf="enableSolutionsButton">Generar respuesta con IA</button>
         <button mat-raised-button class="custom-button" style="margin-left: 10px;" (click)="assignIncident()" *ngIf="assignButtonEnabled">Asignar</button>
       </div>
     </div>
