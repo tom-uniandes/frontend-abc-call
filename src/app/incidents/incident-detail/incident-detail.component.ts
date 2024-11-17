@@ -13,11 +13,12 @@ import { ToastrService } from 'ngx-toastr';
 export class IncidentDetailComponent implements OnInit {
   incident: any = null; // To store incident data
   agentId: string | null = this.getAgentIdFromToken(); // To store agent ID
+  plan: string | null = this.getPlanFromSession(); // To store plan information
   incidentBelongsToAgent: boolean = false; // To check if incident belongs to agent
   replyButtonsEnabled: boolean = false; // To enable reply buttons
   assignButtonEnabled: boolean = false; // To enable assign button
-
-
+  enableSolutionsButton: boolean = false; // To enable solutions button
+  
   constructor(
     public dialog: MatDialog,
     private incidentsService: IncidentsService,
@@ -35,7 +36,7 @@ export class IncidentDetailComponent implements OnInit {
     this.incidentsService.getIncident(incidentId, company).subscribe(
       (data) => {
         this.incident = data;
-        
+
         console.log('Incident details:', this.incident);
         if (this.incident.agentId === this.agentId) {
           console.log('Incident belongs to agent');
@@ -51,6 +52,7 @@ export class IncidentDetailComponent implements OnInit {
           this.replyButtonsEnabled = false
           this.assignButtonEnabled = false
         }
+        this.enableSolutionsButton = this.plan==="EMPRESARIO_PLUS" && this.incidentBelongsToAgent && this.replyButtonsEnabled; // To enable solutions button
         console.log('Incident belongs to agent:', this.incidentBelongsToAgent);
       },
       (error) => {
@@ -110,5 +112,10 @@ export class IncidentDetailComponent implements OnInit {
   getCompanyFromSession(): string | null {
     const company = sessionStorage.getItem("abcall-company");
     return company || null;
+  }
+
+  getPlanFromSession(): string | null {
+    const plan = sessionStorage.getItem("abcall-plan");
+    return plan || null;
   }
 }
