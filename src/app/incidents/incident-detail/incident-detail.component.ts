@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { IncidentsService } from '../incidents.service';
 import { SolutionsDialogComponent } from '../../solutions-dialog/solutions-dialog.component';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -18,12 +18,13 @@ export class IncidentDetailComponent implements OnInit {
   replyButtonsEnabled: boolean = false; // To enable reply buttons
   assignButtonEnabled: boolean = false; // To enable assign button
   enableSolutionsButton: boolean = false; // To enable solutions button
-  
+
   constructor(
     public dialog: MatDialog,
     private incidentsService: IncidentsService,
     private toastr: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,6 +62,11 @@ export class IncidentDetailComponent implements OnInit {
     );
   }
 
+  viewIncidentResponse(): void {
+    // Navega a la página de respuesta del incidente con el ID seleccionado
+    this.router.navigate(['/incidents/incident-response', this.incident.id]);
+  }
+
   openSolutionsDialog(): void {
     this.dialog.open(SolutionsDialogComponent, {
       width: '80%', // Use a percentage for responsive design
@@ -79,7 +85,7 @@ export class IncidentDetailComponent implements OnInit {
       agentId: agentId,
       company: company
     };
-    
+
     this.incidentsService.updateIncidentAgent(requestBody).subscribe(
       (response) => {
         this.toastr.success('Incident assigned successfully');

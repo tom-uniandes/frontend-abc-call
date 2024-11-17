@@ -21,6 +21,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchIncidentComponent } from './search-incident/search-incident.component';
 import { SearchIncidentPublicComponent } from './search-incident-public/search-incident-public.component';
 import { IncidentDetailPublicComponent } from './incident-detail-public/incident-detail-public.component';
+import { ResponseIncidentComponent } from './response-incident/response-incident.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { IncidentDetailPublicComponent } from './incident-detail-public/incident
     SolutionsDialogComponent,
     SearchIncidentComponent,
     SearchIncidentPublicComponent,
-    IncidentDetailPublicComponent
+    IncidentDetailPublicComponent,
+    ResponseIncidentComponent
   ],
   imports: [
     CommonModule,
