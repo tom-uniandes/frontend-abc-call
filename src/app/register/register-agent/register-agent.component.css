@@ -33,7 +33,6 @@ button {
   width: 180px;
   height: 40px;
   background-color: #3a506b;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -41,7 +40,7 @@ button {
 }
 
 .btn-registrarse:hover {
-  background-color: #3a506b;
+  background-color: #1c2451;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
@@ -49,7 +48,7 @@ button {
   border-radius: 100px;
   width: 180px;
   height: 40px;
-  background-color: #1c2451;
+  background-color: #3a506b;
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;

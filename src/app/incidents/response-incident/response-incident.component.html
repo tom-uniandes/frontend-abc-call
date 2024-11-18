@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="container-fluid mt-5" *ngIf="incident">
+  <div class="row">
+    <div class="col-md-10 offset-md-1"> <!-- Wider column, centered -->
+      <h1>Responder incidente {{ incident.id }}</h1>
+      <hr/>
+
+      <p>
+        {{ incident.description }}
+      </p>
+
+      <form [formGroup]="responseForm" (ngSubmit)="responseIncident()">
+
+        <div class="row mb-3">
+          <div class="col-12">
+            <label for="response">Respuesta:</label>
+            <mat-form-field appearance="outline" class="w-100">
+              <textarea matInput formControlName="response" id="response" rows="4" placeholder="Escriba la respuesta del incidente"></textarea>
+            </mat-form-field>
+            <div *ngIf="responseForm.get('response')?.invalid && responseForm.get('response')?.touched" class="text-danger">
+              <div *ngIf="responseForm.get('response')?.errors?.['required']">La respuesta es requerida</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div style="display: flex; justify-content: flex-start; margin-top: 20px;">
+          <button mat-raised-button color="primary" type="submit">Enviar</button>
+          <button mat-raised-button class="custom-button" style="margin-left: 10px;" type="button" (click)="returnViewDetalleIncident()">Cancelar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>

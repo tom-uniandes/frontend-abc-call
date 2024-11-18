@@ -11,6 +11,8 @@ import { SearchIncidentComponent } from './incidents/search-incident/search-inci
 import { RoleAndPlanGuard } from './auth-guard/role-plan.guard';
 import { HomeComponent } from './home/home/home.component';
 import { SearchIncidentPublicComponent } from './incidents/search-incident-public/search-incident-public.component';
+import { IncidentDetailPublicComponent } from './incidents/incident-detail-public/incident-detail-public.component';
+import {ResponseIncidentComponent} from "./incidents/response-incident/response-incident.component";
 
 const routes: Routes = [
   {
@@ -105,8 +107,24 @@ const routes: Routes = [
     }
   },
   {
-    path: 'search-incident',
+    path: 'incidents/incident-response/:id',
+    component: ResponseIncidentComponent,
+    pathMatch: 'full',
+    canActivate: [RoleAndPlanGuard],
+    data: {
+      roles: {
+        "AGENTE": ['EMPRENDEDOR', 'EMPRESARIO', 'EMPRESARIO_PLUS'],
+      }
+    }
+  },
+  {
+    path: 'public/search-incident',
     component: SearchIncidentPublicComponent,
+    pathMatch: 'full',
+  },
+  {
+    path: 'public/incident-detail/:id',
+    component: IncidentDetailPublicComponent,
     pathMatch: 'full',
   },
   {

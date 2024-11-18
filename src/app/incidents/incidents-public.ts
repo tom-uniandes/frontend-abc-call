@@ -1,4 +1,4 @@
-export class IncidentSearchPublic {
+export class IncidentPublic {
   id: number;
   type: string;
   description: string;

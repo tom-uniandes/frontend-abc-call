@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Incident } from './incident';
 import { User } from './user'; // Assuming you have a `User` model defined
 import { environment } from '../../environments/environment';
-import { IncidentSearchPublic } from './incidents-search-public';
+import { IncidentPublic } from './incidents-public';
+import { AuthService } from '../auth-guard/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,24 @@ export class IncidentsService {
 
   private apiUrl: string = environment.baseUrl + '/incidents';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService
+  ) { }
+
+  createCommonHeader(): HttpHeaders {
+    let token = localStorage.getItem("abcall-token");
+    return new HttpHeaders()
+    .set('Authorization', `Bearer ${token}`)
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
+  }
+
+  createCommonPublicHeader(): HttpHeaders {
+    return new HttpHeaders()
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
+  }
 
   /**
    * Creates a new incident.
@@ -21,7 +39,9 @@ export class IncidentsService {
    * @returns An observable containing the created incident.
    */
   createIncident(incident: Incident): Observable<Incident> {
-    return this.http.post<Incident>(`${this.apiUrl}/create_incident`, incident);
+    let headers = this.createCommonHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.post<Incident>(`${this.apiUrl}/create_incident`, incident, { headers });
   }
 
   /**
@@ -30,7 +50,18 @@ export class IncidentsService {
    * @returns An observable containing the incident details.
    */
   getIncident(id: string, company: string): Observable<Incident> {
-    return this.http.get<Incident>(`${this.apiUrl}/get_incident/${id}/${company}`);
+    let headers = this.createCommonHeader()
+    return this.http.get<Incident>(`${this.apiUrl}/get_incident/${id}/${company}`, { headers });
+  }
+
+  /**
+   * Get an incident by ID without login.
+   * @param id The ID of the incident.
+   * @returns An observable containing the incident details.
+   */
+  getIncidentPublic(id: string): Observable<IncidentPublic> {
+    let headers = this.createCommonPublicHeader()
+    return this.http.get<IncidentPublic>(`${this.apiUrl}/public/get_incident/${id}`, { headers });
   }
 
   /**
@@ -39,7 +70,8 @@ export class IncidentsService {
    * @returns An observable containing the user details.
    */
   getUser(userId: string, company: string): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/get_user/${userId}/${company}`);
+    let headers = this.createCommonHeader()
+    return this.http.get<User>(`${this.apiUrl}/get_user/${userId}/${company}`, { headers });
   }
 
   /**
@@ -48,7 +80,9 @@ export class IncidentsService {
    * @returns An observable containing the created user.
    */
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/create_user`, user);
+    let headers = this.createCommonHeader();
+    headers.set('Content-Type', 'application/json')
+    return this.http.post<User>(`${this.apiUrl}/create_user`, user, { headers });
   }
 
   /**
@@ -57,7 +91,8 @@ export class IncidentsService {
    * @returns An observable containing the list of incidents.
    */
   getIncidents(company: string): Observable<Incident[]> {
-    return this.http.get<Incident[]>(`${this.apiUrl}/get_incidents/${company}`);
+    let headers = this.createCommonHeader()
+    return this.http.get<Incident[]>(`${this.apiUrl}/get_incidents/${company}`, { headers });
   }
 
    /**
@@ -66,14 +101,26 @@ export class IncidentsService {
    * @returns An observable containing the created incident.
    */
    update_incident_response(incident: any): Observable<Incident> {
-    return this.http.put<Incident>(`${this.apiUrl}/update_incident_response`, incident);
+    let headers = this.createCommonHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.put<Incident>(`${this.apiUrl}/update_incident_response`, incident, { headers });
   }
 
   searchIncident(incident: Incident): Observable<Incident> {
-    return this.http.post<Incident>(`${this.apiUrl}/search_incident`, incident);
+    let headers = this.createCommonHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.post<Incident>(`${this.apiUrl}/search_incident`, incident, { headers });
   }
 
-  searchIncidentPublic(incident: IncidentSearchPublic): Observable<IncidentSearchPublic> {
-    return this.http.post<IncidentSearchPublic>(`${this.apiUrl}/search_incident`, incident);
+  searchIncidentPublic(incident: IncidentPublic): Observable<IncidentPublic> {
+    let headers = this.createCommonPublicHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.post<IncidentPublic>(`${this.apiUrl}/public/search_incident`, incident, { headers });
+  }
+  
+  updateIncidentAgent(body: any): Observable<Incident> {
+    let headers = this.createCommonHeader()
+    headers.set('Content-Type', 'application/json')
+    return this.http.put<Incident>(`${this.apiUrl}/update_incident_agent`, body, { headers });
   }
 }

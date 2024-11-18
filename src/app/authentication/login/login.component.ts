@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.verifyLogin(login)
       .subscribe((response) => {
-        sessionStorage.setItem("abcall-token", response.token);
+        localStorage.setItem("abcall-token", response.token);
         sessionStorage.setItem("abcall-company", response.company);
         sessionStorage.setItem("abcall-rol", response.rol);
         sessionStorage.setItem("abcall-plan", response.plan);

@@ -1,14 +1,14 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IncidentDetailComponent } from './incident-detail.component';
+
+import { IncidentDetailPublicComponent } from './incident-detail-public.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { NavbarPublicComponent } from '../../menu/navbar-public/navbar-public.component';
 import { IncidentsService } from '../incidents.service';
-import { NavbarComponent } from '../../menu/navbar/navbar.component';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 
-describe('IncidentDetailComponent', () => {
-  let component: IncidentDetailComponent;
-  let fixture: ComponentFixture<IncidentDetailComponent>;
+describe('IncidentDetailPublicComponent', () => {
+  let component: IncidentDetailPublicComponent;
+  let fixture: ComponentFixture<IncidentDetailPublicComponent>;
   let activatedRouteMock: any;
 
   beforeEach(waitForAsync(() => {
@@ -22,41 +22,31 @@ describe('IncidentDetailComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientModule,
-        RouterModule.forRoot([]),
-        ToastrModule.forRoot() // Add ToastrModule with default configuration
+        RouterModule
       ],
       declarations: [
-        IncidentDetailComponent,
-        NavbarComponent
+        IncidentDetailPublicComponent,
+        NavbarPublicComponent
       ],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: activatedRouteMock
         },
-        IncidentsService,
-        ToastrService
+        IncidentsService
       ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IncidentDetailComponent);
+    fixture = TestBed.createComponent(IncidentDetailPublicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should open the dialog when button is clicked', () => {
-    spyOn(component, 'openSolutionsDialog');
-
-    component.openSolutionsDialog();
-
-    expect(component.openSolutionsDialog).toHaveBeenCalled();
   });
 
 });

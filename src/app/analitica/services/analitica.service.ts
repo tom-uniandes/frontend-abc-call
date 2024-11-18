@@ -4,8 +4,7 @@ import {Observable, throwError} from "rxjs";
 import {FilterIncidente, ResultadoIncidente} from "../model";
 import { environment } from '../../../environments/environment';
 import {catchError} from "rxjs/operators";
-
-let headers = new HttpHeaders({ 'Content-Type': 'application/json' })
+import { AuthService } from '../../auth-guard/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +13,25 @@ export class AnaliticaService {
 
   private apiUrl: string = environment.baseUrl + '/analitica';
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+  ) { }
+
+  createCommonHeader(): HttpHeaders {
+    let token = localStorage.getItem("abcall-token");
+    return new HttpHeaders()
+    .set('Authorization', `Bearer ${token}`)
+    .set('X-Abcall-Transaction', this.authService.generateTransactionKey())
+    .set('X-Abcall-Origin-Request', 'web');
+  }
 
   getIncidents(company: string|null, filters: FilterIncidente|undefined): Observable<ResultadoIncidente> {
     let parametros = {}
     if (filters) {
       parametros = filters
     }
+    let headers = this.createCommonHeader()
     return this.http.get<ResultadoIncidente>(`${this.apiUrl}/get_incidents/${company}`, { params: parametros, headers: headers}).pipe(
       catchError(this.handleError)
     );

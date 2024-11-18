@@ -23,6 +23,19 @@
           <button type="button" class="btn btn-primary" (click)="searchIncident()">Buscar</button>
         </div>
       </div>
+      <!-- Filtro de incidentes -->
+      <div class="row mb-3 align-items-center">
+        <div class="col-md-3">
+          <label for="filter" class="form-label">Filtro:</label>
+          <select class="form-select" id="filter" (change)="filterIncidents($event)">
+            <option value="all">Todos</option>
+            <option value="open">Abiertos</option>
+            <option value="closed">Resueltos</option>
+            <option value="assignedToMe">Asignados a mí</option>
+            <option value="unassigned">Sin asignar</option>
+          </select>
+        </div>
+      </div>
     </form>
   
     <div *ngFor="let incident of incidents" class="incident-card mb-3 p-3 rounded" (click)="viewIncidentDetail(incident.id)" style="cursor: pointer;">

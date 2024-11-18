@@ -6,6 +6,7 @@ import { AuthenticationService } from '../authentication.service';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NavbarPublicComponent } from '../../menu/navbar-public/navbar-public.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -20,7 +21,8 @@ describe('LoginComponent', () => {
         RouterModule
       ],
       declarations: [
-        LoginComponent
+        LoginComponent,
+        NavbarPublicComponent
       ],
       providers: [
         AuthenticationService

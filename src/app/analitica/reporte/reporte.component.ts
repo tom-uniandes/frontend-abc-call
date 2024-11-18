@@ -42,6 +42,7 @@ export class ReporteComponent {
 
   dataIncXCanal: any = null;
   opcIncXCanal: any = null;
+  hoy = new Date().toISOString().split("T")[0];
 
   dataIncConSolucion: any = null;
   opcIncConSolucion: any = null;

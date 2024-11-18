@@ -1,23 +1,25 @@
 <app-navbar></app-navbar>
-<div class="container-fluid">
+<div class="container-fluid contenedor-analitica">
   <div class="row">
     <div class="col-sm-3">
       <div class="form-group">
         <label for="fecha_inicio">Fecha Inicio:</label>
-        <input [(ngModel)]="fechaInicio" type="date" class="form-control" id="fecha_inicio" (change)="loadchartdata()"/>
+        <input [(ngModel)]="fechaInicio" type="date" class="form-control"
+               id="fecha_inicio" (change)="loadchartdata();fechaFin=fechaInicio" [max]="hoy"/>
       </div>
       <div class="form-group">
         <label for="fecha_final">Fecha Final:</label>
-        <input [(ngModel)]="fechaFin" type="date" class="form-control" id="fecha_final" (change)="loadchartdata()"/>
+        <input [(ngModel)]="fechaFin" type="date" class="form-control"
+               id="fecha_final" (change)="loadchartdata()" [min]="fechaInicio" [max]="hoy"/>
       </div>
       <div class="form-group">
         <label for="tipo_incidente">Tipo Incidente:</label>
         <select [(ngModel)]="tipoIncidente" class="form-control" id="tipo_incidente" (change)="loadchartdata()">
           <option value="">Todos</option>
-          <option value="1">Petición</option>
-          <option value="2">Queja</option>
-          <option value="3">Reclamo</option>
-          <option value="4">Sugerencia</option>
+          <option value="PETICION">Petición</option>
+          <option value="QUEJA">Queja</option>
+          <option value="RECLAMO">Reclamo</option>
+          <option value="SUGERENCIA">Sugerencia</option>
         </select>
       </div>
       <div class="form-grupo">
@@ -62,7 +64,7 @@
           <div class="col-6">
             <div class="border rounded p-2" style="height: 100%">
               <p>Incidentes por canal</p>
-              <div style="height:250px">
+              <div style="height:170px">
                 <canvas baseChart id="chart_incidentes_por_canal"
                         [data]="dataIncXCanal"
                         [options]="opcIncXCanal"
@@ -73,7 +75,7 @@
           <div class="col-6 ">
             <div class="border rounded p-2" style="height: 100%">
               <p>Incidentes Sin Resolver por Semana</p>
-              <div style="height:250px">
+              <div style="height:200px">
                 <canvas baseChart id="chart_incidentes_no_resueltos"
                         [data]="dataIncSinSolucion"
                         [options]="opcIncSinSolucion"
@@ -84,7 +86,7 @@
           <div class="col-6 ">
             <div class="border rounded p-2" style="height: 100%">
               <p>Incidentes Resueltas por Semana</p>
-              <div style="height:250px">
+              <div style="height:200px">
                 <canvas baseChart id="chart_incidentes_resueltos"
                         [data]="dataIncConSolucion"
                         [options]="opcIncConSolucion"

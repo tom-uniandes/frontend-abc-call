@@ -33,23 +33,6 @@ button {
   width: 180px;
   height: 40px;
   background-color: #3a506b;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  text-transform: capitalize;
-  font-family: 'Roboto', sans-serif;
-  font-weight: normal;
-  font-size: 15px;
-}
-
-.btn-registrarse:hover {
-  background-color: #3a506b;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.btn-registrarse {
-  border-radius: 100px;
-  width: 180px;
-  height: 40px;
-  background-color: #1c2451;
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -62,17 +45,11 @@ button {
   margin-bottom: 10%;
 }
 
-.registrarse {
-  margin-left: 30%;
-  margin-top: 8%;
-  margin-bottom: 10%;
-}
-
 .btn-iniciar-sesion {
   border-radius: 100px;
   width: 180px;
   height: 40px;
-  background-color: #1c2451;
+  background-color: #3a506b;
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
   font-weight: normal;
@@ -80,7 +57,7 @@ button {
 }
 
 .btn-iniciar-sesion:hover {
-  background-color: #3a506b;
+  background-color: #1c2451;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 

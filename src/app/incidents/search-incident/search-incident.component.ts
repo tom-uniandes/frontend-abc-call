@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IncidentsService } from '../incidents.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { timeInterval } from 'rxjs';
 
 @Component({
   selector: 'app-search-incident',
@@ -68,11 +69,76 @@ export class SearchIncidentComponent implements OnInit {
           }
         },
         (error) => {
-          this.toastr.error('No se pudo realizar la búsqueda de incidentes', 'Error');
+          let errorMessage = error.error?.message || 'Ocurrió algún error al buscar el incidente, intente nuevamente';
+          this.toastr.error(errorMessage);
         }
       );
     } else {
       this.toastr.warning('No se encontró una compañía en la sesión', 'Advertencia');
+    }
+  }
+  
+  filterIncidents(event: Event): void {
+    const target = event.target as HTMLSelectElement; // Cast to HTMLSelectElement
+    const filter = target.value;
+    
+    const agentId = this.getAgentIdFromToken(); // Get the logged-in agent ID
+    if (!agentId) {
+      this.toastr.warning('No se encontró el ID del agente en sesión', 'Advertencia');
+      return;
+    }
+  
+    switch (filter) {
+      case 'all':
+        this.getIncidents(); // Fetch all incidents
+        break;
+  
+      case 'open':
+        this.getIncidents();
+        setTimeout(() => {
+          this.incidents = this.incidents.filter((incident) => !incident.solved);
+        }, 500);
+        break;
+
+      case 'closed':
+        this.getIncidents();
+        setTimeout(() => {
+          this.incidents = this.incidents.filter((incident) => incident.solved);
+        }, 500);
+        break;
+
+      case 'assignedToMe':
+        this.getIncidents();
+        setTimeout(() => {
+          this.incidents = this.incidents.filter((incident) => incident.agentId === agentId);
+        }, 500);
+        break;
+  
+      case 'unassigned':
+        this.getIncidents();
+        setTimeout(() => {
+          this.incidents = this.incidents.filter((incident) => !incident.agentId || incident.agentId === '');
+        }, 500);
+        break;
+  
+      default:
+        this.getIncidents(); // Default case to fetch all incidents
+    }
+  }
+  
+  // Helper methods to retrieve agent ID and company information from session or token
+  getAgentIdFromToken(): string | null {
+    const token = localStorage.getItem("abcall-token");
+    if (!token) {
+      return null;
+    }
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.user_id || null;
+    } catch (e) {
+      console.error('Error decoding token:', e);
+      return null;
     }
   }
 
