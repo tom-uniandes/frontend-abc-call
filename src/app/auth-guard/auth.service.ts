@@ -22,7 +22,7 @@ export class AuthService {
 
   verifyAuthorization(): Observable<ResponseAuthorization> {
     let headers = this.createCommonHeader()
-    return this.http.get<ResponseAuthorization>(`${environment.baseUrl}/auth/verify-authorization`, { headers });
+    return this.http.get<ResponseAuthorization>(`${environment.baseUrl}/auth/verify-authorization?uri=/auth/verify-authorization`, { headers });
   }
 
   generateTransactionKey(): string {
