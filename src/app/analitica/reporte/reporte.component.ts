@@ -35,7 +35,7 @@ export class ReporteComponent {
   fechaFin: any = '';
   tipoIncidente: any = '';
   agente: any = '';
-
+  global_recommendation: any = '';
   total_usuarios = 0
   incidentes_resueltos = 0
   total_incidentes = 0
@@ -99,6 +99,7 @@ export class ReporteComponent {
           this.total_usuarios = value.total_usuarios;
           this.incidentes_resueltos = value.incidentes_resueltos;
           this.total_incidentes = value.total_incidentes
+          this.global_recommendation = value.global_recommendation
           this.setDataXCanal(value.incidentes_canal)
           this.setDataSinSolucion(value.sin_solucion)
           this.setDataConSolucion(value.con_solucion)

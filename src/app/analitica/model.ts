@@ -31,16 +31,5 @@ export interface ResultadoIncidente {
   con_solucion: number[];
   lista_agentes: string[];
   agentes: Agente[];
+  global_recommendation:string;
 }
-/***
- {
- total_incidentes: number,
- total_usuarios: number,
- incidentes_resueltos: number,
-incidentes_canal: [0,0,0,0],
-   sin_solucion: [0,0,0,0,0,0,0],
- con_solucion: [0,0,0,0,0,0,0],
-   lista_agentes: ['Juan', 'Pedro'],
-
- }
- */
