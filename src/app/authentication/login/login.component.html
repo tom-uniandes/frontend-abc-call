@@ -21,7 +21,7 @@
               />
               <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">
                 <div *ngIf="loginForm.get('email')?.errors?.['required']">El correo es requerido</div>
-                <div *ngIf="loginForm.get('email')?.errors?.['maxLength']">No debe tener más de 130 caracteres</div>
+                <div *ngIf="loginForm.get('email')?.errors?.['maxlength']">No debe tener más de 100 caracteres</div>
                 <div *ngIf="loginForm.get('email')?.errors?.['email']">Debe ingresar un correo válido</div>
               </div>
             </div>
@@ -39,7 +39,7 @@
               />
               <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">
                 <div *ngIf="loginForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
-                <div *ngIf="loginForm.get('password')?.errors?.['maxLength']">No debe tener más de 20 caracteres</div>
+                <div *ngIf="loginForm.get('password')?.errors?.['maxlength']">No debe tener más de 20 caracteres</div>
               </div>
             </div>
             <div>

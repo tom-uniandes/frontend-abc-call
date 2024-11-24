@@ -22,7 +22,7 @@ export class SearchIncidentPublicComponent implements OnInit {
 
   ngOnInit(): void {
     this.searchForm = this.formBuilder.group({
-      userId: ['', [Validators.required, Validators.pattern(/^\d+$/)]],
+      userId: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/), Validators.maxLength(30)]],
       incidentId: ['', Validators.required]
     });
   }

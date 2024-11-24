@@ -22,7 +22,7 @@
               />
               <div *ngIf="userAgentForm.get('name')?.invalid && userAgentForm.get('name')?.touched" class="text-danger">
                 <div *ngIf="userAgentForm.get('name')?.errors?.['required']">El nombre es requerido</div>
-                <div *ngIf="userAgentForm.get('name')?.errors?.['maxLength']">No debe tener más de 150 caracteres</div>
+                <div *ngIf="userAgentForm.get('name')?.errors?.['maxlength']">No debe tener más de 100 caracteres</div>
               </div>
             </div>
 
@@ -56,6 +56,7 @@
               />
               <div *ngIf="userAgentForm.get('idNumber')?.invalid && userAgentForm.get('idNumber')?.touched" class="text-danger">
                 <div *ngIf="userAgentForm.get('idNumber')?.errors?.['required']">El número de identificación es requerido</div>
+                <div *ngIf="userAgentForm.get('idNumber')?.errors?.['maxlength']">No debe superar los 30 caracteres</div>
               </div>
             </div>
 
@@ -72,7 +73,7 @@
               />
               <div *ngIf="userAgentForm.get('email')?.invalid && userAgentForm.get('email')?.touched" class="text-danger">
                 <div *ngIf="userAgentForm.get('email')?.errors?.['required']">El correo es requerido</div>
-                <div *ngIf="userAgentForm.get('email')?.errors?.['maxLength']">No debe tener más de 130 caracteres</div>
+                <div *ngIf="userAgentForm.get('email')?.errors?.['maxlength']">No debe tener más de 100 caracteres</div>
                 <div *ngIf="userAgentForm.get('email')?.errors?.['email']">Debe ingresar un correo válido</div>
               </div>
             </div>
@@ -96,7 +97,8 @@
               </div>
               <div *ngIf="userAgentForm.get('phoneNumber')?.invalid && userAgentForm.get('phoneNumber')?.touched" class="text-danger">
                 <div *ngIf="userAgentForm.get('phoneNumber')?.errors?.['required']">El teléfono es requerido</div>
-                <div *ngIf="userAgentForm.get('phoneNumber')?.errors?.['maxLength']">No debe tener más de 50 caracteres</div>
+                <div *ngIf="userAgentForm.get('phoneNumber')?.errors?.['maxlength']">No debe tener más de 15 caracteres</div>
+                <div *ngIf="userAgentForm.get('phoneNumber')?.errors?.['minlength']">No debe tener menos de 4 caracteres</div>
                 <div *ngIf="userAgentForm.get('phoneNumber')?.errors?.['pattern']">Deben ser solo números</div>
               </div>
             </div>
@@ -114,8 +116,17 @@
               />
               <div *ngIf="userAgentForm.get('password')?.invalid && userAgentForm.get('password')?.touched" class="text-danger">
                 <div *ngIf="userAgentForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
-                <div *ngIf="userAgentForm.get('password')?.errors?.['minLength']">No debe tener menos de 8 caracteres</div>
-                <div *ngIf="userAgentForm.get('password')?.errors?.['maxLength']">No debe tener más de 20 caracteres</div>
+                <div *ngIf="userAgentForm.get('password')?.errors?.['maxlength']">No debe tener más de 20 caracteres</div>
+                <div *ngIf="userAgentForm.get('password')?.errors?.['pattern']">
+                  La contraseña debe tener al menos:
+                  <ul>
+                    <li>8 caracteres.</li>
+                    <li>Una letra mayúscula.</li>
+                    <li>Una letra minúscula.</li>
+                    <li>Un número.</li>
+                    <li>Un caracter especial (ej.: .$!%*?&).</li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="row justify-content-center registrarse">

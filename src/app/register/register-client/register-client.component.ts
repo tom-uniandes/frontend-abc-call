@@ -26,13 +26,13 @@ export class RegisterClientComponent implements OnInit {
 
   ngOnInit() {
     this.userClientForm = this.formBuilder.group({
-      name: ["", [Validators.required, Validators.maxLength(150)]],
+      name: ["", [Validators.required, Validators.maxLength(100)]],
       idType: ["", [Validators.required]],
-      idNumber: ["", [Validators.required]],
+      idNumber: ["", [Validators.required, Validators.maxLength(30)]],
       email: ["", [Validators.required, Validators.email, Validators.maxLength(150)]],
-      phoneNumber: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.maxLength(50)]],
+      phoneNumber: ["", [Validators.required, Validators.pattern(/^[0-9.]+$/), Validators.minLength(4), Validators.maxLength(15)]],
       company: ["", [Validators.required, Validators.maxLength(60)]],
-      password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(20)]],
+      password: ["", [Validators.required, Validators.minLength(8), Validators.maxLength(20), Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/)]],
     });
   }
 

@@ -22,7 +22,7 @@
               />
               <div *ngIf="userClientForm.get('name')?.invalid && userClientForm.get('name')?.touched" class="text-danger">
                 <div *ngIf="userClientForm.get('name')?.errors?.['required']">El nombre es requerido</div>
-                <div *ngIf="userClientForm.get('name')?.errors?.['maxLength']">No debe tener más de 150 caracteres</div>
+                <div *ngIf="userClientForm.get('name')?.errors?.['maxlength']">No debe tener más de 100 caracteres</div>
               </div>
             </div>
 
@@ -56,6 +56,7 @@
               />
               <div *ngIf="userClientForm.get('idNumber')?.invalid && userClientForm.get('idNumber')?.touched" class="text-danger">
                 <div *ngIf="userClientForm.get('idNumber')?.errors?.['required']">El número de identificación es requerido</div>
+                <div *ngIf="userClientForm.get('idNumber')?.errors?.['maxlength']">No debe superar los 30 caracteres</div>
               </div>
             </div>
 
@@ -72,7 +73,7 @@
               />
               <div *ngIf="userClientForm.get('email')?.invalid && userClientForm.get('email')?.touched" class="text-danger">
                 <div *ngIf="userClientForm.get('email')?.errors?.['required']">El correo es requerido</div>
-                <div *ngIf="userClientForm.get('email')?.errors?.['maxLength']">No debe tener más de 130 caracteres</div>
+                <div *ngIf="userClientForm.get('email')?.errors?.['maxlength']">No debe tener más de 100 caracteres</div>
                 <div *ngIf="userClientForm.get('email')?.errors?.['email']">Debe ingresar un correo válido</div>
               </div>
             </div>
@@ -96,7 +97,8 @@
               </div>
               <div *ngIf="userClientForm.get('phoneNumber')?.invalid && userClientForm.get('phoneNumber')?.touched" class="text-danger">
                 <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['required']">El teléfono es requerido</div>
-                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['maxLength']">No debe tener más de 50 caracteres</div>
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['maxlength']">No debe tener más de 15 caracteres</div>
+                <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['minlength']">No debe tener menos de 4 caracteres</div>
                 <div *ngIf="userClientForm.get('phoneNumber')?.errors?.['pattern']">Deben ser solo números</div>
               </div>
             </div>
@@ -114,7 +116,7 @@
               />
               <div *ngIf="userClientForm.get('company')?.invalid && userClientForm.get('company')?.touched" class="text-danger">
                 <div *ngIf="userClientForm.get('company')?.errors?.['required']">La empresa es requerida</div>
-                <div *ngIf="userClientForm.get('company')?.errors?.['maxLength']">No debe tener más de 60 caracteres</div>
+                <div *ngIf="userClientForm.get('company')?.errors?.['maxlength']">No debe tener más de 60 caracteres</div>
               </div>
             </div>
 
@@ -131,8 +133,17 @@
               />
               <div *ngIf="userClientForm.get('password')?.invalid && userClientForm.get('password')?.touched" class="text-danger">
                 <div *ngIf="userClientForm.get('password')?.errors?.['required']">La contraseña es requerida</div>
-                <div *ngIf="userClientForm.get('password')?.errors?.['minLength']">No debe tener menos de 8 caracteres</div>
-                <div *ngIf="userClientForm.get('password')?.errors?.['maxLength']">No debe tener más de 20 caracteres</div>
+                <div *ngIf="userClientForm.get('password')?.errors?.['maxlength']">No debe tener más de 20 caracteres</div>
+                <div *ngIf="userClientForm.get('password')?.errors?.['pattern']">
+                  La contraseña debe tener al menos:
+                  <ul>
+                    <li>8 caracteres.</li>
+                    <li>Una letra mayúscula.</li>
+                    <li>Una letra minúscula.</li>
+                    <li>Un número.</li>
+                    <li>Un caracter especial (ej.: .$!%*?&).</li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="row justify-content-center registrarse">
