@@ -40,7 +40,6 @@ button {
 }
 
 .iniciar-sesion {
-  margin-left: 30%;
   margin-top: 10%;
   margin-bottom: 10%;
 }
@@ -67,10 +66,6 @@ button {
   color: black;
   font-size: 14px;
   text-decoration: none;
-}
-
-.contrasena-olvidada {
-  margin-left: 32%;
   margin-top: 4%;
 }
 

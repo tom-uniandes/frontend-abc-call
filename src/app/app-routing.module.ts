@@ -9,6 +9,7 @@ import { CreateIncidentComponent } from './incidents/create-incident/create-inci
 import { IncidentDetailComponent } from './incidents/incident-detail/incident-detail.component';
 import { SearchIncidentComponent } from './incidents/search-incident/search-incident.component';
 import { RoleAndPlanGuard } from './auth-guard/role-plan.guard';
+import { SessionStartedGuard } from './auth-guard/session-started.guard';
 import { HomeComponent } from './home/home/home.component';
 import { SearchIncidentPublicComponent } from './incidents/search-incident-public/search-incident-public.component';
 import { IncidentDetailPublicComponent } from './incidents/incident-detail-public/incident-detail-public.component';
@@ -18,16 +19,19 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [SessionStartedGuard]
   },
   {
     path: 'login',
     component: LoginComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [SessionStartedGuard]
   },
   { path: 'register',
     component: RegisterClientComponent,
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate: [SessionStartedGuard]
   },
   {
     path: 'clients/manage-plan',
@@ -121,11 +125,13 @@ const routes: Routes = [
     path: 'public/search-incident',
     component: SearchIncidentPublicComponent,
     pathMatch: 'full',
+    canActivate: [SessionStartedGuard]
   },
   {
     path: 'public/incident-detail/:id',
     component: IncidentDetailPublicComponent,
     pathMatch: 'full',
+    canActivate: [SessionStartedGuard]
   },
   {
     path: '',
