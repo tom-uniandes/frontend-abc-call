@@ -6,7 +6,10 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "cy:run": "cypress run",
+    "cy:open": "cypress open",
+    "test:e2e": "start-server-and-test start http://localhost:4200 cy:run"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +38,7 @@
     "@angular/localize": "^18.2.7",
     "@types/crypto-js": "^4.2.2",
     "@types/jasmine": "~5.1.0",
+    "cypress": "^13.16.0",
     "jasmine-core": "~5.1.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
@@ -44,6 +48,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "karma-mocha-reporter": "^2.2.5",
     "karma-sonarqube-unit-reporter": "^0.0.23",
+    "start-server-and-test": "^2.0.8",
     "typescript": "~5.5.2"
   }
 }
