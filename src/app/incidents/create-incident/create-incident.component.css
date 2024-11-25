@@ -1,6 +1,7 @@
 .container {
   max-width: 800px;
   margin: 0 auto;
+  margin-bottom: 6%;
 }
 
 .header-title {
@@ -85,3 +86,23 @@ button[mat-icon-button] {
   display: flex;
   margin-top: 20px;
 }
+
+
+button {
+  border-radius: 20px;
+  color: white;
+  background-color: #2A2D6D;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+button {
+  background-color: #3a506b !important;
+  color: white !important;
+}
+
+button:hover {
+  background-color: #1c2451 !important;
+}
+

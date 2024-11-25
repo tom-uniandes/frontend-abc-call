@@ -10,6 +10,8 @@
         <input type="text" class="form-control" id="userId" placeholder="Ingrese el ID del usuario" formControlName="userId">
         <div *ngIf="searchForm.get('userId')?.invalid && searchForm.get('userId')?.touched" class="text-danger">
           <small *ngIf="searchForm.get('userId')?.errors?.['required']">El ID de usuario es obligatorio.</small>
+          <small *ngIf="searchForm.get('userId')?.errors?.['pattern']">No se permiten caracteres especiales.</small>
+          <small *ngIf="searchForm.get('userId')?.errors?.['maxlength']">No debe superar los 30 caracteres</small>
         </div>
       </div>
       <div class="col-md-4">
@@ -17,6 +19,7 @@
         <input type="text" class="form-control" id="incidentId" placeholder="Ingrese el ID del incidente" formControlName="incidentId">
         <div *ngIf="searchForm.get('incidentId')?.invalid && searchForm.get('incidentId')?.touched" class="text-danger">
           <small *ngIf="searchForm.get('incidentId')?.errors?.['required']">El ID del incidente es obligatorio.</small>
+          <small *ngIf="searchForm.get('incidentId')?.errors?.['maxlength']">No debe superar los 36 caracteres</small>
         </div>
       </div>
       <div class="col-md-2 d-flex justify-content-end">
